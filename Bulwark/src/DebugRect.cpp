@@ -3,12 +3,12 @@
 #include <iostream>
 #include <vector>
 
-bool DebugRect::Enabled;
+bool DebugRect::enabled;
 std::list<sf::RectangleShape> DebugRect::objects;
 
-void DebugRect::AddRect(sf::FloatRect Rect, sf::Color color)
+void DebugRect::addRect(sf::FloatRect Rect, sf::Color color)
 {
-	if (!Enabled) return;
+	if (!enabled) return;
 	sf::RectangleShape rect;
 
 	rect.setSize(sf::Vector2f(Rect.width, Rect.height));
@@ -21,9 +21,9 @@ void DebugRect::AddRect(sf::FloatRect Rect, sf::Color color)
 	objects.push_back(rect);
 }
 
-void DebugRect::Draw(sf::RenderTarget & target)
+void DebugRect::draw(sf::RenderTarget & target)
 {
-	if (!Enabled) return;
+	if (!enabled) return;
 
 	for (auto obj : objects)
 		target.draw(obj);

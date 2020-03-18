@@ -1,52 +1,52 @@
 #include "UIScreen.h"
 #include "Program.h"
 
-void UIScreen::Update()
+void UIScreen::update()
 {
 	// Сначала изменяем
-	UpdateDrag(); 
-	UpdateOver();
+	updateDrag(); 
+	updateOver();
 
 
 	for (UIBase* c : controls)
 	{
-		(*c).Update();
+		(*c).update();
 	}
 }
 
-void UIScreen::UpdateOver()
+void UIScreen::updateOver()
 {
-	Over = nullptr;
+	over = nullptr;
 
 	for (UIBase* c : controls)
 	{
-		(*c).UpdateOver();
+		(*c).updateOver();
 	}
 }
 
-void UIScreen::UpdateDrag()
+void UIScreen::updateDrag()
 {
 	// Если сохранили интерфейс - (значит было разрешено)
-	if (Drag != nullptr)
+	if (drag != nullptr)
 	{
 		// Если все ещё разрешено
-		if ((*Drag).GetDragAllow())
+		if ((*drag).getDragAllow())
 		{
-			sf::Vector2f NextPos = GetMouseCoords() - (*Drag).GetDragOffSet();
+			sf::Vector2f NextPos = GetMouseCoords() - (*drag).getDragOffSet();
 	
-			(*Drag).setPosition(sf::Vector2f(window.mapCoordsToPixel(NextPos)));
+			(*drag).setPosition(sf::Vector2f(window.mapCoordsToPixel(NextPos)));
 		}
 		// Если уже не разрешено
 		else
 		{
 			// Если под курсором что-то есть
-			if (Over != nullptr)
-				(*Drag).OnDrop();
+			if (over != nullptr)
+				(*drag).onDrop();
 			else
-				(*Drag).OnCancelDrag();
+				(*drag).onCancelDrag();
 	
 			// Отпускаем
-			Drag = nullptr;
+			drag = nullptr;
 		}
 	
 		//// Если зажата левая кнопка - передвидаем
@@ -70,19 +70,19 @@ void UIScreen::UpdateDrag()
 	}
 }
 
-void UIScreen::Draw(sf::RenderTarget &target)
+void UIScreen::draw(sf::RenderTarget &target)
 {
 	for (UIBase *c : controls)
-		(*c).Draw(target);
+		(*c).draw(target);
 }
 
-void UIScreen::AddControl(UIBase *ControlAdress)
+void UIScreen::addControl(UIBase *ControlAdress)
 {
 	ControlAdress->setScreenParent(this);
 	controls.push_back(ControlAdress); // Добавляем адресс Интерфейса в список
 }
 
-void UIScreen::DeleteControl(unsigned int index)
+void UIScreen::deleteControl(unsigned int index)
 {
 	if (index > controls.size()) return;
 
@@ -95,7 +95,7 @@ void UIScreen::DeleteControl(unsigned int index)
 	controls.erase(iter);        
 }
 
-void UIScreen::DeleteControls()
+void UIScreen::deleteControls()
 {
 	for (UIBase* c : controls)
 	{
@@ -104,14 +104,14 @@ void UIScreen::DeleteControls()
 	controls.clear();
 }
 
-bool UIScreen::MouseIntersect()
+bool UIScreen::mouseIntersect()
 {
 	bool intersect = false;
 	for (UIBase* c : controls)
 	{
 		sf::Vector2f MouseGlobalPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
 
-		if ((*c).GetGlobalBounds().contains(MouseGlobalPos))
+		if ((*c).getGlobalBounds().contains(MouseGlobalPos))
 		{
 			intersect = true;
 			break;

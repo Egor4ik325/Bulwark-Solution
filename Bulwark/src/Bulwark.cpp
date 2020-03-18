@@ -19,9 +19,9 @@ Bulwark::Bulwark()
 	// Меню
 	gameIsPlay = false;
 	// Карта
-	map.LoadFromFile(ContentManager::CONTENT_DIR + "Map.tmx");   // Карта 30x30
-	map.SetTileSize(TILE_SIZE);
-	map.SetTileType(3, TileMap::WALL); map.SetTileType(5, TileMap::WALL); map.SetTileType(10, TileMap::WALL);
+	map.loadFromFile(ContentManager::CONTENT_DIR + "Map.tmx");   // Карта 30x30
+	map.setTileSize(TILE_SIZE);
+	map.setTileType(3, TileMap::WALL); map.setTileType(5, TileMap::WALL); map.setTileType(10, TileMap::WALL);
 
 	// Параметры вида
 	view.reset(FloatRect(0.0f, 0.0f, WIDTH, HEIGHT));
@@ -29,60 +29,60 @@ Bulwark::Bulwark()
 	//view.setSize(1280, 800);                             // Маштабируем
 	//view.reset(FloatRect(offsetX, offsetY, WIDTH, HEIGHT)); // Движение
 	//Sprite Map; Map.setTexture(Content::MapTexture); Map.setTILE_SIZE(4, 4); Map.setTextureRect(IntRect(16, 0, 16, 16));
-	player.SetTexture(ContentManager::PlayerTexture);
-	player.SetTileMap(map);
+	player.setTexture(ContentManager::playerTexture);
+	player.setTileMap(map);
 
-	DebugRect::Enabled = true;
+	DebugRect::enabled = true;
 
-	CreateUI();
+	createUI();
 	
 	// Яблоки
 	Item* item = new Item();
-	(*item).Construct(ContentManager::ItemSet, sf::IntRect(0, 0, TILE_SIZE, TILE_SIZE));
-	ItemManager::AddItem(item);
+	(*item).construct(ContentManager::itemSet, sf::IntRect(0, 0, TILE_SIZE, TILE_SIZE));
+	ItemManager::addItem(item);
 
 	Item* item2 = new Item();
-	(*item2).Construct(ContentManager::ItemSet, sf::IntRect(0, 0, TILE_SIZE, TILE_SIZE));
-	item2->SetTilePosition(sf::Vector2f(10, 12));
-	ItemManager::AddItem(item2);
+	(*item2).construct(ContentManager::itemSet, sf::IntRect(0, 0, TILE_SIZE, TILE_SIZE));
+	item2->setTilePosition(sf::Vector2f(10, 12));
+	ItemManager::addItem(item2);
 
 	// Добавляем яблоко в инвентарь
-	Player::inventory->GetCell(0)->SetItem(item);
+	Player::inventory->getCell(0)->setItem(item);
 }
 
-void Bulwark::CreateUI()
+void Bulwark::createUI()
 {
 	UIScreen* menu = new UIScreen(); 
 	menuScreen = menu;
-	UIButton* startButton = new UIButton("Start", sf::Color::Black, ContentManager::Font);
+	UIButton* startButton = new UIButton("Start", sf::Color::Black, ContentManager::font);
 	startButton->setPosition(WIDTH / 2 - 100, 350);
-	startButton->SetColor(sf::Color::Green);
+	startButton->setColor(sf::Color::Green);
 	startButton->setScreenParent(menu);
-	menu->AddControl(startButton);
+	menu->addControl(startButton);
 	
 	startButtonAddress = startButton;
 
-	UIButton* quitButton = new UIButton("Quit", sf::Color::Black, ContentManager::Font);
+	UIButton* quitButton = new UIButton("Quit", sf::Color::Black, ContentManager::font);
 	quitButton->setPosition(WIDTH / 2 - 100, 470);
-	quitButton->SetColor(sf::Color::Green);
+	quitButton->setColor(sf::Color::Green);
 	quitButton->setScreenParent(menu);
-	menu->AddControl(quitButton);
+	menu->addControl(quitButton);
 	quitButtonAddress = quitButton;
 
 	menu->active = true;
-	UIManager::AddScreen(menu);
+	UIManager::addScreen(menu);
 
 	UIScreen* game = new UIScreen(); 
 	gameScreen = game;
-	game->AddControl(Player::inventory);
+	game->addControl(Player::inventory);
 	game->active = false;
-	UIManager::AddScreen(game);
+	UIManager::addScreen(game);
 
-	Player::inventory->Construct();
+	Player::inventory->construct();
 	Player::inventory->setScreenParent(game);
 }
 
-void Bulwark::PollEnvent()
+void Bulwark::pollEnvent()
 {
 	Event event;
 	while (window.pollEvent(event))
@@ -94,20 +94,20 @@ void Bulwark::PollEnvent()
 			if (event.key.code == Mouse::Left)
 			{
 				// Если курсор не находится над интерфейсом
-				if (UIManager::GetMouseOver() == nullptr)
+				if (UIManager::getMouseOver() == nullptr)
 				{
 					sf::Vector2f MousePos = window.mapPixelToCoords(Mouse::getPosition(window));
-					player.SetTargetedTile(MousePos.x, MousePos.y);
+					player.setTargetedTile(MousePos.x, MousePos.y);
 				}
 			}
 			if (event.key.code == Mouse::Right)
 			{
 				// Если курсор не находится над интерфейсом
-				if (UIManager::GetMouseOver() == nullptr)
+				if (UIManager::getMouseOver() == nullptr)
 				{
 					sf::Vector2f MousePos = window.mapPixelToCoords(Mouse::getPosition(window));
-					player.SetTargetedTile(MousePos.x, MousePos.y);
-					player.Picking = true;
+					player.setTargetedTile(MousePos.x, MousePos.y);
+					player.pking = true;
 				}
 			}
 		}
@@ -140,13 +140,13 @@ void Bulwark::PollEnvent()
 		
 		if (Keyboard::isKeyPressed(Keyboard::Key::Q))
 		{
-			UIInventoryCell* cell = Player::inventory->GetSelectedCell();
-			player.DropUp(cell);
+			UIInventoryCell* cell = Player::inventory->getSelectedCell();
+			player.dropUp(cell);
 		}
 	}
 }
 
-void Bulwark::Update()
+void Bulwark::update()
 {
 	// Время
 	float deltaTime = clock.getElapsedTime().asSeconds();
@@ -157,40 +157,40 @@ void Bulwark::Update()
 	clock.restart();
 
 	// Обновление данных
-	UIManager::Update();
-	player.Update(deltaTime);
+	UIManager::update();
+	player.update(deltaTime);
 
 	// Вид
 	window.setView(view);
-	view.setCenter(player.GetPosition());
+	view.setCenter(player.getPosition());
 
 	// Мышь
 	sf::Vector2f MousePos = window.mapPixelToCoords(Mouse::getPosition(window));
 	//std::cout << "MX " << MousePos.x / 64 << " MY " << MousePos.y / TILE_SIZE << std::endl;
 }
 
-void Bulwark::Draw()
+void Bulwark::draw()
 {
 	// Map
-	map.Draw(window);
+	map.draw(window);
 	// Player
-	player.Draw(window);
+	player.draw(window);
 	// UI
-	UIManager::Draw(window);
+	UIManager::draw(window);
 	// Debug
-	DebugRect::Draw(window);
+	DebugRect::draw(window);
 	// Item
-	ItemManager::Draw(window);
+	ItemManager::draw(window);
 
 	// Текст	
-	DrawText("X ", player.GetPosition().x / TILE_SIZE, Vector2i(WIDTH - 154, 550));
-	DrawText("Y ", player.GetPosition().y / TILE_SIZE, Vector2i(WIDTH - 154, 580));
-	DrawText("FPS ", 1 / time, Vector2i(WIDTH - 134, 0), "%.0f");
+	drawText("X ", player.getPosition().x / TILE_SIZE, Vector2i(WIDTH - 154, 550));
+	drawText("Y ", player.getPosition().y / TILE_SIZE, Vector2i(WIDTH - 154, 580));
+	drawText("FPS ", 1 / time, Vector2i(WIDTH - 134, 0), "%.0f");
 }
 
-void Bulwark::DrawText(const char* text, float data, const sf::Vector2i position, const char* count)
+void Bulwark::drawText(const char* text, float data, const sf::Vector2i position, const char* count)
 {
-	sf::Text Text; Text.setString(""); Text.setFont(ContentManager::Font); Text.setCharacterSize(40); Text.setFillColor(Color::Black);
+	sf::Text Text; Text.setString(""); Text.setFont(ContentManager::font); Text.setCharacterSize(40); Text.setFillColor(Color::Black);
 	char temp[10];  sprintf_s(temp, count, data); // Первеодим float -> string
 
 	Text.setString(text + std::string(temp));
@@ -198,7 +198,7 @@ void Bulwark::DrawText(const char* text, float data, const sf::Vector2i position
 	window.draw(Text, GetViewTransformOffSet());
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
-void Bulwark::PollEnventMenu()
+void Bulwark::pollEnventMenu()
 {
 	Event event;
 	while (window.pollEvent(event))
@@ -209,13 +209,13 @@ void Bulwark::PollEnventMenu()
 		{
 			if (event.key.code == Mouse::Left)
 			{
-				UIBase* over = UIManager::GetMouseOver();
+				UIBase* over = UIManager::getMouseOver();
 				if (over != nullptr)
 				{
 					if (over == startButtonAddress)
 					{
 						gameIsPlay = true;
-						UIManager::DeleteScreen(menuScreen);
+						UIManager::deleteScreen(menuScreen);
 						gameScreen->active = true;
 					}
 					if (over == quitButtonAddress)
@@ -234,16 +234,16 @@ void Bulwark::PollEnventMenu()
 	}
 }
 
-void Bulwark::UpdateMenu()
+void Bulwark::updateMenu()
 {
 	// Обновление данных
-	UIManager::Update();
+	UIManager::update();
 }
 
-void Bulwark::DrawMenu()
+void Bulwark::drawMenu()
 {
 	// Background
-	Sprite grass(ContentManager::TileSet, sf::IntRect(0, 16 * 2, 16, 16)); 
+	Sprite grass(ContentManager::tileSet, sf::IntRect(0, 16 * 2, 16, 16)); 
 	grass.setScale(sf::Vector2f(4, 4));
 	for (int Y = 0; Y < HEIGHT/TILE_SIZE; Y++)
 	{
@@ -257,15 +257,15 @@ void Bulwark::DrawMenu()
 		}
 	}
 	// Logo
-	sf::Sprite logo(ContentManager::MenuTexture);
+	sf::Sprite logo(ContentManager::menuTexture);
 	logo.setPosition(0, 0);
 	window.draw(logo);
 	// UI
-	UIManager::Draw(window);
+	UIManager::draw(window);
 	// Item
-	ItemManager::Draw(window);
+	ItemManager::draw(window);
 	// Debug
-	DebugRect::Draw(window);
+	DebugRect::draw(window);
 }
 
 

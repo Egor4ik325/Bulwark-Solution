@@ -16,18 +16,18 @@ public:
 	
 	UIInventory();
 
-	void Construct();
+	void construct();
 
-	bool GetDragAllow() override;
-	void Update() override;
+	bool getDragAllow() override;
+	void update() override;
 
-	void PickUp();
-	void Drop();
+	void pickUp();
+	void drop();
 
-	UIInventoryCell* GetCell(unsigned int index);
-	UIInventoryCell* GetEmptyCell();
-	UIInventoryCell* GetSelectedCell();
+	UIInventoryCell* getCell(unsigned int index);
+	UIInventoryCell* getFirstEmptyCell();
+	UIInventoryCell* getSelectedCell();
 
 protected:
-	void AddCell();
+	void addCell();
 };

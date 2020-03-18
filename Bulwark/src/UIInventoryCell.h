@@ -13,17 +13,17 @@ public:
 
 	UIInventory* invParent;
 	
-	sf::Color SelectedColor;
+	sf::Color selectedColor;
 public:
 	UIInventoryCell();
 	UIInventoryCell(UIInventory* inv);
 
-	void Update() override;
-	void Draw(sf::RenderTarget& target) override;
+	void update() override;
+	void draw(sf::RenderTarget& target) override;
 
-	void SetItem(Item* item);	
-	void RemoveItem();
-	bool IsEmpty();
-	Item* GetItem();
+	void setItem(Item* item);	
+	void removeItem();
+	bool isEmpty();
+	Item* getItem();
 };
 

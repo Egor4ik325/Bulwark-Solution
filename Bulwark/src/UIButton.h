@@ -11,13 +11,13 @@ protected:
 public:
 	UIButton();
 	UIButton(const std::string& text, const sf::Color& color, const sf::Font& font);
-	void Construct();
+	void construct();
 
-	void Draw(sf::RenderTarget& target) override;
-	void UpdateOver() override;
+	void draw(sf::RenderTarget & target) override;
+	void updateOver() override;
 
-	void SetColor(const sf::Color& color);
+	void setColor(const sf::Color& color);
 protected:
 
-	void DrawText(sf::RenderTarget& target);
+	void drawText(sf::RenderTarget& target);
 };

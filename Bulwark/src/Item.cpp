@@ -14,37 +14,37 @@ Item::Item(const sf::Texture & texture, sf::IntRect TextureRect, int Scale)
 	sprite.setScale(Scale, Scale);
 }
 
-void Item::Construct(const sf::Texture & texture, sf::IntRect TextureRect, int Scale)
+void Item::construct(const sf::Texture & texture, sf::IntRect TextureRect, int Scale)
 {
 	sprite.setTexture(texture);
 	sprite.setTextureRect(TextureRect);
 	sprite.setScale(Scale, Scale);
 }
 
-void Item::Draw(sf::RenderTarget &target)
+void Item::draw(sf::RenderTarget &target)
 {
-	if (OnGround)
+	if (onGround)
 		target.draw(sprite);
 	else
 		target.draw(sprite, GetViewTransformOffSet());
 }
 
-sf::Vector2f Item::GetGlobalPosition()
+sf::Vector2f Item::getGlobalPosition()
 {
 	return sprite.getPosition();
 }
 
-sf::FloatRect Item::GetGlobalBounds()
+sf::FloatRect Item::getGlobalBounds()
 {
 	return sprite.getGlobalBounds();
 }
 
-void Item::SetTilePosition(sf::Vector2f tilePos)
+void Item::setTilePosition(sf::Vector2f tilePos)
 {
 	sprite.setPosition(sf::Vector2f(tilePos.x * TILE_SIZE, tilePos.y * TILE_SIZE));
 }
 
-void Item::SetPosition(sf::Vector2f position)
+void Item::setPosition(sf::Vector2f position)
 {
 	sprite.setPosition(position);
 }

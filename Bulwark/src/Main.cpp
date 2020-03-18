@@ -20,7 +20,7 @@ int main()
 	//system("help");
 
 	// Content
-	ContentManager::LoadContent();
+	ContentManager::loadContent();
 	
 	// Main class
 	Bulwark game;
@@ -37,16 +37,16 @@ int main()
 
 		if (game.gameIsPlay) {
 			// Input 
-			game.PollEnvent();
+			game.pollEnvent();
 			// Update
-			game.Update();
+			game.update();
 			// Draw
-			game.Draw();
+			game.draw();
 		}
 		else {
-			game.PollEnventMenu();
-			game.UpdateMenu();
-			game.DrawMenu();
+			game.pollEnventMenu();
+			game.updateMenu();
+			game.drawMenu();
 		}
 
 		window.display();

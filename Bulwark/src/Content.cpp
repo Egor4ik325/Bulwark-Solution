@@ -2,25 +2,23 @@
 ///////////////////   Инициализация переменных   /////////////////
 
 const std::string ContentManager::CONTENT_DIR = "Content/";
-sf::Texture ContentManager::TileSet;
-sf::Texture ContentManager::PlayerTexture;
-sf::Texture ContentManager::EffectTexture;
-sf::Texture ContentManager::ItemSet;
-sf::Texture ContentManager::InvCellTex;
-sf::Texture ContentManager::MenuTexture;
-sf::Texture ContentManager::UIButtunTexture;
-sf::Font ContentManager::Font;
+sf::Texture ContentManager::tileSet;
+sf::Texture ContentManager::playerTexture;
+sf::Texture ContentManager::effectTexture;
+sf::Texture ContentManager::itemSet;
+sf::Texture ContentManager::invCellTexture;
+sf::Texture ContentManager::menuTexture;
+sf::Font ContentManager::font;
 
-void ContentManager::LoadContent()
+void ContentManager::loadContent()
 {
-	TileSet.loadFromFile(CONTENT_DIR + "TileSet.png");
-	PlayerTexture.loadFromFile(CONTENT_DIR + "PlayerTexture.png");
-	EffectTexture.loadFromFile(CONTENT_DIR + "PlayerTexture.png");
-	ItemSet.loadFromFile(CONTENT_DIR + "ItemSet.png");
-	InvCellTex.loadFromFile(CONTENT_DIR + "InvCellSet.png");
-	MenuTexture.loadFromFile(CONTENT_DIR + "menu.png", sf::IntRect(0,0, 1024, 400));
-	UIButtunTexture.loadFromFile(CONTENT_DIR + "menu.png", sf::IntRect(503, 457, 200, 200));
+	tileSet.loadFromFile(CONTENT_DIR + "TileSet.png");
+	playerTexture.loadFromFile(CONTENT_DIR + "PlayerTexture.png");
+	effectTexture.loadFromFile(CONTENT_DIR + "PlayerTexture.png");
+	itemSet.loadFromFile(CONTENT_DIR + "ItemSet.png");
+	invCellTexture.loadFromFile(CONTENT_DIR + "InvCellSet.png");
+	menuTexture.loadFromFile(CONTENT_DIR + "menu.png", sf::IntRect(0,0, 1024, 400));
 
 	// Texture.setSmoth(bool)
-    Font.loadFromFile(CONTENT_DIR + "Font.ttf");
+    font.loadFromFile(CONTENT_DIR + "Font.ttf");
 }

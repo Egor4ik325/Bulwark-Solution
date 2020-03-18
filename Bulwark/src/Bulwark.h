@@ -21,16 +21,16 @@ public:
 	bool gameIsPlay;
 
 	Bulwark();
-	void PollEnvent();
-	void Update();
-	void Draw();
+	void pollEnvent();
+	void update();
+	void draw();
 	
-	void PollEnventMenu();
-	void UpdateMenu();
-	void DrawMenu();
+	void pollEnventMenu();
+	void updateMenu();
+	void drawMenu();
 
 private:
-	void CreateUI();
-	void DrawText(const char* text, float data, sf::Vector2i position, const char* count = "%.4f");
+	void createUI();
+	void drawText(const char* text, float data, sf::Vector2i position, const char* count = "%.4f");
 };
 

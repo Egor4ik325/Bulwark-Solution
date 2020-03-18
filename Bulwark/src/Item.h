@@ -4,7 +4,6 @@
 class Item
 {
 protected:
-	
 	// Собственные данные
 	sf::Sprite sprite;
 
@@ -12,15 +11,15 @@ protected:
 	unsigned int count;
 	
 public:
-	bool OnGround;
+	bool onGround;
 
 	Item();
 	Item(const sf::Texture &texture, sf::IntRect TextureRect, int Scale = 4);
-	virtual void Construct(const sf::Texture &texture, sf::IntRect TextureRect, int Scale = 4);
-	virtual void Draw(sf::RenderTarget &target);
+	virtual void construct(const sf::Texture &texture, sf::IntRect TextureRect, int Scale = 4);
+	virtual void draw(sf::RenderTarget &target);
 
-	void SetTilePosition(sf::Vector2f tilePos);
-	void SetPosition(sf::Vector2f position);
-	sf::Vector2f GetGlobalPosition();
-	sf::FloatRect GetGlobalBounds();
+	void setTilePosition(sf::Vector2f tilePos);
+	void setPosition(sf::Vector2f position);
+	sf::Vector2f getGlobalPosition();
+	sf::FloatRect getGlobalBounds();
 };

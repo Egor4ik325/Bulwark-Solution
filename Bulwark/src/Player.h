@@ -5,42 +5,13 @@
 
 class Player
 {
-public:
-	Player();
-
-	void Update(float time);
-	void Draw(sf::RenderTarget & target);
-	
-	void PickUp();
-	void DropUp(UIInventoryCell* cell);
-	void Stop();
-	void SetTargetedTile(int x, int y);
-	void MoveBy(int TileX, int TileY);
-
-	void SetTexture(sf::Texture &playerTex);
-	void SetTileMap(TileMap &map);
-	sf::Vector2f GetPosition() const;
-	sf::Vector2i GetRoundPos() const;
-	sf::Vector2i GetTilePos() const;	
-	sf::Vector2i GetMiddleTilePos() const;
-	sf::Vector2f GetMiddlePos() const;
-
-	static UIInventory *inventory;
-
-	bool Picking;
-private:
-	void UpdateMovement(float time);
-	void TargTileDir();
-	void Collision();
-	void Animation(float time);
-
 private:
 	sf::Vector2f position;  // Координаты	
 	sf::Vector2f velocity;  // Скорость
 
 	bool going;
-	
-	bool OnTile;
+
+	bool onTile;
 	float speed; int health;
 
 	enum DIR { UP, DOWN, RIGHT, LEFT, UPRIGHT, UPLEFT, DOWNRIGHT, DOWNLEFT, NONE };
@@ -50,10 +21,41 @@ private:
 
 	// Движение
 	sf::Vector2i targ; sf::Vector2i targT; // Координаты куда идти
-	bool DirGoingFlag; int goneX, goneY;
+	bool dirGoingFlag; int goneX, goneY;
 
 	// Анимация
 	float frame;
 	sf::Sprite sprite;
 	sf::Sprite effect;
+
+public:
+	Player();
+
+	void update(float time);
+	void draw(sf::RenderTarget & target);
+	
+	void pickUp();
+	void dropUp(UIInventoryCell* cell);
+	void stop();
+	void setTargetedTile(int x, int y);
+	void moveBy(int TileX, int TileY);
+
+	void setTexture(sf::Texture &playerTex);
+	void setTileMap(TileMap &map);
+	sf::Vector2f getPosition() const;
+	sf::Vector2i getRoundPos() const;
+	sf::Vector2i getTilePos() const;	
+	sf::Vector2i getMiddleTilePos() const;
+	sf::Vector2f getMiddlePos() const;
+
+	static UIInventory *inventory;
+
+	bool pking;
+private:
+	void updateMovement(float time);
+	void targTileDiraction();
+	void collision();
+	void animation(float time);
+
+
 };

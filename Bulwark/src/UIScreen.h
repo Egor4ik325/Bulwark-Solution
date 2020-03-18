@@ -9,19 +9,19 @@ public:
 	std::vector <UIBase*> controls; // Адреса UI из динам. памяти
 
 	bool active = false;
-	UIBase* Over, *Drag;
+	UIBase* over, *drag;
 
 public:
 
-	void Update();
-	void Draw(sf::RenderTarget &target);
+	void update();
+	void draw(sf::RenderTarget &target);
 
-	void AddControl(UIBase *ControlAdress);
-	void DeleteControl(unsigned int index);
-	void DeleteControls();
-	bool MouseIntersect();
+	void addControl(UIBase *ControlAdress);
+	void deleteControl(unsigned int index);
+	void deleteControls();
+	bool mouseIntersect();
 
 private:
-	void UpdateOver();
-	void UpdateDrag();
+	void updateOver();
+	void updateDrag();
 };

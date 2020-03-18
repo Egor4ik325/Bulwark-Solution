@@ -10,55 +10,55 @@ UIWindow::UIWindow()
 	DragAble = true;
 	rectShape.setSize(sf::Vector2f(300, 200));
 	// Цвета
-	BodyColor = sf::Color(130, 130, 130, 180);
-	TitleColor = sf::Color(90, 90, 90, 200);
-	TitleSelectedColor = sf::Color(120, 120, 120, 200);
+	bodyColor = sf::Color(130, 130, 130, 180);
+	titleColor = sf::Color(90, 90, 90, 200);
+	titleSelectedColor = sf::Color(120, 120, 120, 200);
 	// Заголовок
-	TitleVisible = true;
+	titleVisible = true;
 	title.setSize(sf::Vector2f(rectShape.getSize().x, TITLE_HEIGHT));
 }
 
-void UIWindow::Update()
+void UIWindow::update()
 {	
-	UIBase::Update();
+	UIBase::update();
 
 	// UIWINDOW
 	title.setPosition(rectShape.getPosition());
-	ApplyColors();
+	applyColors();
 }
 
-void UIWindow::UpdateOver()
+void UIWindow::updateOver()
 {	
-	UIBase::UpdateOver();
+	UIBase::updateOver();
 }
 
-bool UIWindow::GetDragAllow()
+bool UIWindow::getDragAllow()
 {
 	if (screenParent == nullptr)
 		return false;
 
-	return (IntersectsWithMouse(title.getGlobalBounds()) || screenParent->Drag == this) && GetMouseLeft();
+	return (IntersectsWithMouse(title.getGlobalBounds()) || screenParent->drag == this) && GetMouseLeft();
 }
 
-void UIWindow::Draw(sf::RenderTarget & target)
+void UIWindow::draw(sf::RenderTarget & target)
 {	
-	UIBase::Draw(target);
+	UIBase::draw(target);
 
 	// UIWINDOW
-	if (TitleVisible)
+	if (titleVisible)
 	{
 		target.draw(title, GetViewTransformOffSet());
 	}
 }
 
-void UIWindow::ApplyColors()
+void UIWindow::applyColors()
 {
-	rectShape.setFillColor(BodyColor);
-	title.setFillColor(TitleColor);
+	rectShape.setFillColor(bodyColor);
+	title.setFillColor(titleColor);
 
-	if (screenParent->Over == this)
-		title.setFillColor(TitleSelectedColor);
+	if (screenParent->over == this)
+		title.setFillColor(titleSelectedColor);
 
-	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && screenParent->Drag == this)
+	if (sf::Mouse::isButtonPressed(sf::Mouse::Left) && screenParent->drag == this)
 		title.setFillColor(sf::Color::Red);
 }

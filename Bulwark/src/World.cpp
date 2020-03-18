@@ -5,7 +5,7 @@ World::World()
 
 }
 
-void World::Update()
+void World::update()
 {
 	
 

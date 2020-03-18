@@ -6,22 +6,22 @@ class UIWindow : public  UIBase
 {
 protected:
 	sf::RectangleShape title;
-	bool TitleVisible;
+	bool titleVisible;
 	const int TITLE_HEIGHT = 25;
 	
-	sf::Color BodyColor;
-	sf::Color TitleColor;
-	sf::Color TitleSelectedColor;
-	sf::Color TitleDragColor;
+	sf::Color bodyColor;
+	sf::Color titleColor;
+	sf::Color titleSelectedColor;
+	sf::Color titleDragColor;
 
-	void ApplyColors();
+	void applyColors();
 public:
 
 	UIWindow();
 
-	void Update() override;
-	void Draw(sf::RenderTarget & target) override;
-	void UpdateOver() override;
+	void update() override;
+	void draw(sf::RenderTarget & target) override;
+	void updateOver() override;
 
-	virtual bool GetDragAllow() override;
+	bool getDragAllow() override;
 };

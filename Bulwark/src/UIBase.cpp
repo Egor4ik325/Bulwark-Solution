@@ -18,15 +18,15 @@ UIBase::UIBase()
 	dragOffset = { 0.f, 0.f };
 }
 
-bool UIBase::GetDragAllow()
+bool UIBase::getDragAllow()
 {
 	if (screenParent == nullptr)
 		return false;
 
-	return (rectShape.getGlobalBounds().contains(GetMouseCoords()) || screenParent->Drag == this) && GetMouseLeft();
+	return (rectShape.getGlobalBounds().contains(GetMouseCoords()) || screenParent->drag == this) && GetMouseLeft();
 }
 
-void UIBase::Draw(sf::RenderTarget &target)
+void UIBase::draw(sf::RenderTarget &target)
 {
 	if (Visible)
 	{	
@@ -34,13 +34,13 @@ void UIBase::Draw(sf::RenderTarget &target)
 	}
 }
 
-void UIBase::Update()
+void UIBase::update()
 {
 	
 }
 
 // Обновляем информацию объекта под курсором
-void UIBase::UpdateOver()
+void UIBase::updateOver()
 {
 	// Без родителя нельза двигать
 	if (screenParent == nullptr)
@@ -50,19 +50,19 @@ void UIBase::UpdateOver()
 	{
 		std::cout << "Intersect!! \n" ;
 		
-		if (DragAble && GetDragAllow())
+		if (DragAble && getDragAllow())
 		{
 			// Если не передвигаем 
 			//ЭТОТ КОД ВЫПОЛНЯЕТСЯ 1 РАЗ ВНАЧАЛЕ ПЕРЕТАСКИВАНИЯ
-			if (screenParent->Drag == nullptr)
+			if (screenParent->drag == nullptr)
 			{
 				// Если способны передвигать
 				//if (IsMouseLeft())
 				{
-					screenParent->Drag = this;
+					screenParent->drag = this;
 					dragOffset = GetMouseCoords() - rectShape.getPosition();
 
-					OnDragBegin();
+					onDragBegin();
 
 					std::cout << "START MOVING!! \n";
 				}
@@ -70,20 +70,20 @@ void UIBase::UpdateOver()
 		}
 
 		// Если не передвигаем, то находимся над интерфейсом
-		if (screenParent->Drag != this)
-			screenParent->Over = this;
+		if (screenParent->drag != this)
+			screenParent->over = this;
 	}
 }
 
-void UIBase::OnDragBegin()
+void UIBase::onDragBegin()
 {
 }
 
-void UIBase::OnDrop()
+void UIBase::onDrop()
 {
 }
 
-void UIBase::OnCancelDrag()
+void UIBase::onCancelDrag()
 {
 }
 
@@ -113,18 +113,18 @@ void UIBase::setSize(float x, float y)
 	setSize(sf::Vector2f(x, y));
 }
 
-sf::Vector2f UIBase::GetPosition() const
+sf::Vector2f UIBase::getPosition() const
 {
 	return rectShape.getPosition();
 }
 
-sf::Vector2f UIBase::GetGlobalPosition() const
+sf::Vector2f UIBase::getGlobalPosition() const
 {
 	sf::Vector2f coords = rectShape.getPosition() + GetViewOffSet();
 	return coords;
 }
 
-sf::FloatRect UIBase::GetGlobalBounds() const
+sf::FloatRect UIBase::getGlobalBounds() const
 {
 	sf::FloatRect globalBounds = rectShape.getGlobalBounds();
 	globalBounds.left += GetViewOffSet().x;
@@ -132,12 +132,12 @@ sf::FloatRect UIBase::GetGlobalBounds() const
 	return globalBounds;
 }
 
-sf::Vector2f UIBase::GetDragOffSet() const
+sf::Vector2f UIBase::getDragOffSet() const
 {
 	return dragOffset;
 }
 
-sf::RectangleShape* UIBase::GetRectShape()
+sf::RectangleShape* UIBase::getRectShape()
 {
 	return &rectShape;
 }

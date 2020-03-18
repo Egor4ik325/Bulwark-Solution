@@ -5,80 +5,80 @@
 
 std::vector <UIScreen*> UIManager::screens;
 
-UIBase* UIManager::OverAll = nullptr;
-UIBase* UIManager::DragAll = nullptr;
+UIBase* UIManager::overAll = nullptr;
+UIBase* UIManager::dragAll = nullptr;
 
-void UIManager::Update()
+void UIManager::update()
 {
-	UpdateDrag();
+	updateDrag();
 	for (UIScreen* uiscr : screens)
 	{
 		if ((*uiscr).active)
 		{
-			(*uiscr).Update();
+			(*uiscr).update();
 			// Выводим одни общие указатели на *Drag и *Over
-			DragAll = uiscr->Drag;
-			OverAll = uiscr->Over;
+			dragAll = uiscr->drag;
+			overAll = uiscr->over;
 			
 		}
 	}	
 }
 
-void UIManager::UpdateDrag()
+void UIManager::updateDrag()
 {
 }
 
-void UIManager::Draw(sf::RenderTarget & target)
+void UIManager::draw(sf::RenderTarget & target)
 {
 	for (UIScreen* uiscr : screens)
 		if ((*uiscr).active)
-			(*uiscr).Draw(target);
+			(*uiscr).draw(target);
 }
 
-UIBase* UIManager::GetMouseOver()
+UIBase* UIManager::getMouseOver()
 {
 	UIBase* over = nullptr;
 	for (UIScreen* screen : screens)
 	{
 		if (screen->active)
 		{
-			if (screen->Over != nullptr)
+			if (screen->over != nullptr)
 			{
-				over = screen->Over;
+				over = screen->over;
 			}
 		}
 	}
 	return over;
 }
 
-UIBase* UIManager::GetMouseDrag()
+UIBase* UIManager::getMouseDrag()
 {
 	UIBase* drag = nullptr;
 	for (UIScreen* screen : screens)
 	{
 		if (screen->active)
 		{
-			if (screen->Drag != nullptr)
+			if (screen->drag != nullptr)
 			{
-				drag = screen->Over;
+				drag = screen->over;
 			}
 		}
 	}
 	return drag;
 }
 
-void UIManager::AddScreen(UIScreen* uiscreen)
+void UIManager::addScreen(UIScreen* uiscreen)
 {
 	screens.push_back(uiscreen);
 }
 
-void UIManager::DeleteScreen(unsigned int index)
+void UIManager::deleteScreen(unsigned int index)
 {
 	if (index > screens.size()) return;
 
 	// Удаляем из динамической памяти
 	UIScreen* screen = screens[index];
-	screen->DeleteControls();
+	screen->deleteControls();
 	delete screens[index];
 
 	// Удаляем из списка
@@ -87,29 +87,29 @@ void UIManager::DeleteScreen(unsigned int index)
 	screens.erase(iter);
 }
 
-void UIManager::DeleteScreen(UIScreen* screen)
+void UIManager::deleteScreen(UIScreen* screen)
 {
 	for (int i = 0; i < screens.size(); i++)
 	{
 		if (&screen[i] == screen)
 		{
-			DeleteScreen(i);
+			deleteScreen(i);
 			return;
 		}
 	}
 }
 
-void UIManager::AddControl(unsigned int screenIndex, UIBase* controlAdress)
+void UIManager::addControl(unsigned int screenIndex, UIBase* controlAdress)
 {
 	if (screenIndex > screens.size()) return;
 
-	screens[screenIndex]->AddControl(controlAdress);
+	screens[screenIndex]->addControl(controlAdress);
 }
 
-void UIManager::DeleteControl(unsigned int screenIndex, unsigned int controlIndex)
+void UIManager::deleteControl(unsigned int screenIndex, unsigned int controlIndex)
 {
 	if (screenIndex > screens.size()) return;
 	if (controlIndex > screens[screenIndex]->controls.size()) return;
 
-	screens[screenIndex]->DeleteControl(controlIndex);
+	screens[screenIndex]->deleteControl(controlIndex);
 }

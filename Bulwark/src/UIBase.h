@@ -17,15 +17,15 @@ public:
 
 	UIBase();
 
-	virtual bool GetDragAllow();
+	virtual bool getDragAllow();
 
-	virtual void Draw(sf::RenderTarget & target);
-	virtual void Update();
-	virtual void UpdateOver();
+	virtual void draw(sf::RenderTarget & target);
+	virtual void update();
+	virtual void updateOver();
 
-	virtual void OnDragBegin();
-	virtual void OnDrop();
-	virtual void OnCancelDrag();
+	virtual void onDragBegin();
+	virtual void onDrop();
+	virtual void onCancelDrag();
 
 	void setPosition(float x, float y);
 	void setPosition(sf::Vector2f position);
@@ -33,9 +33,9 @@ public:
 	void setSize(sf::Vector2f size);
 	void setScreenParent(UIScreen* parent);
 
-	sf::Vector2f GetPosition() const;
-	sf::Vector2f GetGlobalPosition()  const;
-	sf::FloatRect GetGlobalBounds() const;
-	sf::Vector2f GetDragOffSet() const;
-	sf::RectangleShape* GetRectShape();
+	sf::Vector2f getPosition() const;
+	sf::Vector2f getGlobalPosition()  const;
+	sf::FloatRect getGlobalBounds() const;
+	sf::Vector2f getDragOffSet() const;
+	sf::RectangleShape* getRectShape();
 };

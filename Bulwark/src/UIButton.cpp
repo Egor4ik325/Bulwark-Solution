@@ -6,18 +6,18 @@
 
 UIButton::UIButton()
 {
-	Construct();
+	construct();
 }
 
 UIButton::UIButton(const std::string& text,const sf::Color& color,const sf::Font& font)
 {
-	Construct();
+	construct();
 	this->text.setString(text); 
 	this->text.setFillColor(color);
 	this->text.setFont(font);
 }
 
-void UIButton::Construct()
+void UIButton::construct()
 {
 	rectShape.setFillColor(sf::Color::White);
 	rectShape.setPosition(100.f, 100.f);
@@ -33,29 +33,29 @@ void UIButton::Construct()
 	DragAble = false;
 }
 
-void UIButton::Draw(sf::RenderTarget& target)
+void UIButton::draw(sf::RenderTarget& target)
 {
-	UIBase::Draw(target);
+	UIBase::draw(target);
 
 	if (rectShape.getGlobalBounds().contains(GetMouseCoords()) && GetMouseLeft())
 		rectShape.setFillColor(sf::Color::White); 
 	else
 		rectShape.setFillColor(color);
 
-    DrawText(target);
+    drawText(target);
 }
 
-void UIButton::UpdateOver()
+void UIButton::updateOver()
 {
-	UIBase::UpdateOver();
+	UIBase::updateOver();
 }
 
-void UIButton::SetColor(const sf::Color & color)
+void UIButton::setColor(const sf::Color & color)
 {
 	this->color = color;
 }
 
-void UIButton::DrawText(sf::RenderTarget& target)
+void UIButton::drawText(sf::RenderTarget& target)
 {
 	float sizeRel = rectShape.getSize().x / 100.f; // Относительность размера текста зависит только от длины
 	sizeRel *= (200.f / text.getString().getSize());														 

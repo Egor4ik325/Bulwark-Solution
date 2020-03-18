@@ -10,69 +10,69 @@ UIInventory::UIInventory()
 {
 }
 
-void UIInventory::Construct()
+void UIInventory::construct()
 { 
 	DragAble = true;
-	TitleVisible = false;
-	BodyColor = sf::Color(256, 256, 256, 100);
+	titleVisible = false;
+	bodyColor = sf::Color(256, 256, 256, 100);
 
 	cellCount = 5;
 	rectShape.setSize(sf::Vector2f(cellCount * 64 + 64, 64));
 	for (int i = 0; i < cellCount; i++)
-		AddCell();
+		addCell();
 
 	selectedCell = 0;
 }
 
-bool UIInventory::GetDragAllow()
+bool UIInventory::getDragAllow()
 {
-	return UIBase::GetDragAllow();
+	return UIBase::getDragAllow();
 }
 
-void UIInventory::Update()
+void UIInventory::update()
 {
-	UIWindow::Update();
+	UIWindow::update();
 
 	for (int i = 0; i < cellCount; i++)
 	{
 		UIInventoryCell* cell = cells[i];
 
-		cell->Update();
+		cell->update();
 		cell->setPosition(rectShape.getPosition() + sf::Vector2f(i * TILE_SIZE,0));
 	}
 }
 
-void UIInventory::PickUp()
+void UIInventory::pickUp()
 {
 }
 
-void UIInventory::Drop()
+void UIInventory::drop()
 {
 }
 
-void UIInventory::AddCell()
+void UIInventory::addCell()
 {
 	UIInventoryCell* cell = new UIInventoryCell(this);
-	(*cell).setPosition(cells.size() * (*cell).GetRectShape()->getSize().x, 0);
+	(*cell).setPosition(cells.size() * (*cell).getRectShape()->getSize().x, 0);
 	cell->setScreenParent(screenParent);
-	UIManager::AddControl(0, cell);
+	UIManager::addControl(0, cell);
     cells.push_back(cell);
 }
-UIInventoryCell * UIInventory::GetEmptyCell()
+UIInventoryCell * UIInventory::getFirstEmptyCell()
 {
 	for (UIInventoryCell* cell : cells)
 	{
-		if (cell->IsEmpty())
+		if (cell->isEmpty())
 			return cell;
 	}
 	
 	return nullptr;
 }
-UIInventoryCell * UIInventory::GetSelectedCell()
+UIInventoryCell * UIInventory::getSelectedCell()
 {
-	return GetCell(selectedCell);
+	return getCell(selectedCell);
 }
-UIInventoryCell* UIInventory::GetCell(unsigned int index)
+UIInventoryCell* UIInventory::getCell(unsigned int index)
 {
 	if (index < cells.size())
 		return cells[index];

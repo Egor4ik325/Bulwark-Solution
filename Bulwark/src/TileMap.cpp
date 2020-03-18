@@ -8,7 +8,7 @@
 
 using namespace sf;
 
-bool TileMap::LoadFromFile(std::string filename)
+bool TileMap::loadFromFile(std::string filename)
 {
 	TiXmlDocument levelFile(filename.c_str());
 
@@ -122,7 +122,7 @@ bool TileMap::LoadFromFile(std::string filename)
 		{
 			int tileGID = atoi(tileElement->Attribute("gid"));
 			// Записываем айди всех плиток  в вектор
-			layer.TilesId.push_back(tileGID);
+			layer.tilesId.push_back(tileGID);
 
 			int subRectToUse = tileGID - firstTileID;
 
@@ -158,7 +158,7 @@ bool TileMap::LoadFromFile(std::string filename)
 	return true;
 }
 
-void TileMap::Draw(sf::RenderTarget & target)
+void TileMap::draw(sf::RenderTarget & target)
 {
 	// Рисуем все тайлы (объекты НЕ рисуем!)
 	for (int layer = 0; layer < layers.size(); layer++)
@@ -166,7 +166,7 @@ void TileMap::Draw(sf::RenderTarget & target)
 			target.draw(layers[layer].tiles[tile]);
 }
 
-int TileMap::GetTileId(int x, int y)
+int TileMap::getTileId(int x, int y)
 {
 	// Преобразуем pixel в тайлы
 	int TileX = x / TILE_SIZE;
@@ -179,25 +179,25 @@ int TileMap::GetTileId(int x, int y)
 	// Берем Id самого верхнего слоя
 	int layer = layers.size(); layer--;
 
-	return layers[layer].TilesId[TileX + TileY * width] - 1;
+	return layers[layer].tilesId[TileX + TileY * width] - 1;
 }
 
-int TileMap::GetTileId(Vector2i TilePos)
+int TileMap::getTileId(Vector2i TilePos)
 {
-	return GetTileId(TilePos.x, TilePos.y);
+	return getTileId(TilePos.x, TilePos.y);
 }
 
-TileMap::TileType TileMap::GetTileType(int x, int y)
+TileMap::TileType TileMap::getTileType(int x, int y)
 {
-	return TypeArr[GetTileId(x, y)];
+	return typeArr[getTileId(x, y)];
 }
 
-TileMap::TileType TileMap::GetTileType(const Vector2i &TilePos)
+TileMap::TileType TileMap::getTileType(const Vector2i &TilePos)
 {
-	return TypeArr[GetTileId(TilePos.x, TilePos.y)];
+	return typeArr[getTileId(TilePos.x, TilePos.y)];
 }
 
-void TileMap::SetTileSize(const int TileSize)
+void TileMap::setTileSize(const int TileSize)
 {
 	for (int layer = 0; layer < layers.size(); layer++)
 		for (int tile = 0; tile < layers[layer].tiles.size(); tile++)
@@ -214,7 +214,7 @@ void TileMap::SetTileSize(const int TileSize)
 		}
 }
 
-void TileMap::SetTileType(int id, TileType type)
+void TileMap::setTileType(int id, TileType type)
 {
-	TypeArr[id] = type;
+	typeArr[id] = type;
 }

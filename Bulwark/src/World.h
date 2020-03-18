@@ -8,6 +8,6 @@ private:
 	
 public:
 	World();
-	void Update();
+	void update();
 
 };

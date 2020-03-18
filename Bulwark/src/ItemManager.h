@@ -14,17 +14,17 @@ class ItemManager
 private:
 	static std::vector <Item*> items;
 
-	static ItemInfo ItemInfoArr[10];
+	static ItemInfo itemInfoArr[10];
 
 public:
 
-	static void Draw(sf::RenderTarget &target);
-	static void AddItem(Item* item);	
+	static void draw(sf::RenderTarget &target);
+	static void addItem(Item* item);	
 
-	static Item* GetItem(int tileX, int tileY);
-	static Item* GetItem(sf::Vector2f pos);
+	static Item* getItem(int tileX, int tileY);
+	static Item* getItem(sf::Vector2f pos);
 
-	static void SetItemInfo(unsigned int id, const ItemInfo& info);
-	static ItemInfo GetItemInfo(unsigned int id);
+	static void setItemInfo(unsigned int id, const ItemInfo& info);
+	static ItemInfo getItemInfo(unsigned int id);
 
 };

@@ -3,22 +3,22 @@
 #include "Program.h"
 
 std::vector <Item*> ItemManager::items;
-ItemInfo ItemManager::ItemInfoArr[];
+ItemInfo ItemManager::itemInfoArr[];
 
-void ItemManager::AddItem(Item * item)
+void ItemManager::addItem(Item * item)
 {
 	items.push_back(item);
 }
 
-void ItemManager::Draw(sf::RenderTarget& target)
+void ItemManager::draw(sf::RenderTarget& target)
 {
 	for (Item* item : items)
 	{
-		(*item).Draw(target);
+		(*item).draw(target);
 	}
 }
 
-Item* ItemManager::GetItem(int tileX, int tileY)
+Item* ItemManager::getItem(int tileX, int tileY)
 {
 	for (Item* item : items)
 	{
@@ -27,26 +27,26 @@ Item* ItemManager::GetItem(int tileX, int tileY)
 		//sf::Vector2f itemCoords(item->GetGlobalPosition());
 		//sf::FloatRect itemRect(itemPos, sf::Vector2f( TILE_SIZE, TILE_SIZE ));
 		
-		if (item->GetGlobalBounds().contains(pointPos))
+		if (item->getGlobalBounds().contains(pointPos))
 			return item;
 	}
 
 	return nullptr;
 }
 
-Item * ItemManager::GetItem(sf::Vector2f pos)
+Item * ItemManager::getItem(sf::Vector2f pos)
 {
-	return GetItem(pos.x / TILE_SIZE, pos.y / TILE_SIZE);
+	return getItem(pos.x / TILE_SIZE, pos.y / TILE_SIZE);
 }
 
-void ItemManager::SetItemInfo(unsigned int id, const ItemInfo & info)
+void ItemManager::setItemInfo(unsigned int id, const ItemInfo & info)
 {
-	ItemInfoArr[id] = info;
+	itemInfoArr[id] = info;
 }
 
-ItemInfo ItemManager::GetItemInfo(unsigned int id)
+ItemInfo ItemManager::getItemInfo(unsigned int id)
 {
 	if (id > 10) return ItemInfo();
 	
-	return ItemInfoArr[id];
+	return itemInfoArr[id];
 }
