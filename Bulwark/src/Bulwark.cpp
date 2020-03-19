@@ -33,7 +33,7 @@ Bulwark::Bulwark()
 	player.setTileMap(map);
 
 	DebugRect::enabled = true;
-
+	
 	createUI();
 	
 	// Яблоки
@@ -47,6 +47,7 @@ Bulwark::Bulwark()
 	ItemManager::addItem(item2);
 
 	// Добавляем яблоко в инвентарь
+	Player::inventory->construct();
 	Player::inventory->getCell(0)->setItem(item);
 }
 
@@ -78,7 +79,7 @@ void Bulwark::createUI()
 	game->active = false;
 	UIManager::addScreen(game);
 
-	Player::inventory->construct();
+	
 	Player::inventory->setScreenParent(game);
 }
 
@@ -238,6 +239,8 @@ void Bulwark::updateMenu()
 {
 	// Обновление данных
 	UIManager::update();
+	// Item
+	ItemManager::draw(window);
 }
 
 void Bulwark::drawMenu()

@@ -15,6 +15,8 @@ UIInventoryCell::UIInventoryCell(UIInventory* inv)
 	// Хранимый предмет
 	itemContain = nullptr;
 	//
+	screenParent = invParent->screenParent;
+	//
 	selectedColor = sf::Color::Black;
 	// Устанавливаем текстуру
 	rectShape.setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));

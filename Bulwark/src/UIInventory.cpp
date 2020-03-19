@@ -35,19 +35,9 @@ void UIInventory::update()
 
 	for (int i = 0; i < cellCount; i++)
 	{
-		UIInventoryCell* cell = cells[i];
-
-		cell->update();
-		cell->setPosition(rectShape.getPosition() + sf::Vector2f(i * TILE_SIZE,0));
+		cells[i]->update();
+		cells[i]->setPosition(rectShape.getPosition() + sf::Vector2f(i * TILE_SIZE,0));
 	}
-}
-
-void UIInventory::pickUp()
-{
-}
-
-void UIInventory::drop()
-{
 }
 
 void UIInventory::addCell()
@@ -55,7 +45,9 @@ void UIInventory::addCell()
 	UIInventoryCell* cell = new UIInventoryCell(this);
 	(*cell).setPosition(cells.size() * (*cell).getRectShape()->getSize().x, 0);
 	cell->setScreenParent(screenParent);
-	UIManager::addControl(0, cell);
+
+	cell->screenParent->addControl(cell);
+
     cells.push_back(cell);
 }
 UIInventoryCell * UIInventory::getFirstEmptyCell()

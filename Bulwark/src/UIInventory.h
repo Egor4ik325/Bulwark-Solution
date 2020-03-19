@@ -21,9 +21,6 @@ public:
 	bool getDragAllow() override;
 	void update() override;
 
-	void pickUp();
-	void drop();
-
 	UIInventoryCell* getCell(unsigned int index);
 	UIInventoryCell* getFirstEmptyCell();
 	UIInventoryCell* getSelectedCell();

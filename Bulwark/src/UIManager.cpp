@@ -99,17 +99,24 @@ void UIManager::deleteScreen(UIScreen* screen)
 	}
 }
 
-void UIManager::addControl(unsigned int screenIndex, UIBase* controlAdress)
+UIScreen * UIManager::getScreen(unsigned int index)
 {
-	if (screenIndex > screens.size()) return;
-
-	screens[screenIndex]->addControl(controlAdress);
+	if (index > screens.size())
+		return nullptr;
+	return screens[index];
 }
 
-void UIManager::deleteControl(unsigned int screenIndex, unsigned int controlIndex)
-{
-	if (screenIndex > screens.size()) return;
-	if (controlIndex > screens[screenIndex]->controls.size()) return;
-
-	screens[screenIndex]->deleteControl(controlIndex);
-}
+//void UIManager::addControl(unsigned int screenIndex, UIBase* controlAdress)
+//{
+//	if (screenIndex > screens.size()) return;
+//
+//	screens[screenIndex]->addControl(controlAdress);
+//}
+//
+//void UIManager::deleteControl(unsigned int screenIndex, unsigned int controlIndex)
+//{
+//	if (screenIndex > screens.size()) return;
+//	if (controlIndex > screens[screenIndex]->controls.size()) return;
+//
+//	screens[screenIndex]->deleteControl(controlIndex);
+//}

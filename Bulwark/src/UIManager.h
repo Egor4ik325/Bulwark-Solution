@@ -24,8 +24,10 @@ public:
 	static void deleteScreen(unsigned int index);
 	static void deleteScreen(UIScreen* screen);
 
-	static void addControl(unsigned int screenIndex, UIBase *controlAdress);
-	static void deleteControl(unsigned int screenIndex, unsigned int controlIndex);
+	static UIScreen* getScreen(unsigned int index);
+
+	//static void addControl(unsigned int screenIndex, UIBase *controlAdress);
+	//static void deleteControl(unsigned int screenIndex, unsigned int controlIndex);
 private:
 
 	static void updateDrag();
