@@ -14,9 +14,9 @@ protected:
 public:
 	unsigned int selectedCell;
 	
-	UIInventory();
+	UIInventory(UIScreen* screenParent);
 
-	void construct();
+	//void construct();
 
 	bool getDragAllow() override;
 	void update() override;

@@ -6,7 +6,7 @@
 #include "Program.h"
 #include "UIInventoryCell.h"
 
-UIInventory* Player::inventory = new UIInventory;
+UIInventory* Player::inventory;
 
 Player::Player()
 {
@@ -668,6 +668,11 @@ void Player::setTexture(sf::Texture & playerTex)
 {
 	sprite.setTexture(playerTex); sprite.setTextureRect(sf::IntRect(0, 0, 16, 16)); sprite.setScale(4, 4);
 	effect.setTexture(playerTex); effect.setTextureRect(sf::IntRect(16, 64, 16, 16)); effect.setScale(4, 4);
+}
+
+void Player::setIventory(UIInventory * inventory)
+{
+	this->inventory = inventory;
 }
 
 void Player::setTileMap(TileMap & map)

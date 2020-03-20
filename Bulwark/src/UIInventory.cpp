@@ -6,12 +6,8 @@
 #include "Item.h"
 #include "UIInventoryCell.h"
 
-UIInventory::UIInventory()
+UIInventory::UIInventory(UIScreen* screenParent)
 {
-}
-
-void UIInventory::construct()
-{ 
 	DragAble = true;
 	titleVisible = false;
 	bodyColor = sf::Color(256, 256, 256, 100);
@@ -66,8 +62,8 @@ UIInventoryCell * UIInventory::getSelectedCell()
 }
 UIInventoryCell* UIInventory::getCell(unsigned int index)
 {
-	if (index < cells.size())
-		return cells[index];
+	if (index > cells.size())
+		return nullptr;
 
-	return nullptr;
+	return cells[index];
 }

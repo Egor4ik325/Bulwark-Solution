@@ -4,20 +4,7 @@
 #include "DebugRect.h"
 #include <iostream>
 
-UIButton::UIButton()
-{
-	construct();
-}
-
-UIButton::UIButton(const std::string& text,const sf::Color& color,const sf::Font& font)
-{
-	construct();
-	this->text.setString(text); 
-	this->text.setFillColor(color);
-	this->text.setFont(font);
-}
-
-void UIButton::construct()
+UIButton::UIButton(UIScreen* screenParent)
 {
 	rectShape.setFillColor(sf::Color::White);
 	rectShape.setPosition(100.f, 100.f);
@@ -32,6 +19,25 @@ void UIButton::construct()
 
 	DragAble = false;
 }
+
+//UIButton::UIButton(const std::string& text,const sf::Color& color,const sf::Font& font)
+//{
+//	rectShape.setFillColor(sf::Color::White);
+//	rectShape.setPosition(100.f, 100.f);
+//	rectShape.setSize(sf::Vector2f(200.f, 100.f));
+//	rectShape.setOutlineThickness(10.f);
+//	rectShape.setOutlineColor(sf::Color::Black);
+//
+//	this->text.setFillColor(sf::Color::Black);
+//	this->text.setPosition(0, 0);
+//	this->text.setString("");
+//	this->text.setScale(1, 1);
+//
+//	DragAble = false;
+//	this->text.setString(text); 
+//	this->text.setFillColor(color);
+//	this->text.setFont(font);
+//}
 
 void UIButton::draw(sf::RenderTarget& target)
 {

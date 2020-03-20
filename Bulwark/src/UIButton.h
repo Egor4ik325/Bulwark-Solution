@@ -9,9 +9,8 @@ protected:
 	sf::Color color;
 
 public:
-	UIButton();
-	UIButton(const std::string& text, const sf::Color& color, const sf::Font& font);
-	void construct();
+	UIButton(UIScreen* screenParent);
+	//UIButton(const std::string& text, const sf::Color& color, const sf::Font& font);
 
 	void draw(sf::RenderTarget & target) override;
 	void updateOver() override;

@@ -11,7 +11,8 @@ private:
 	sf::View view;
 	sf::Clock clock; float time;
 	//std::list <Effect> Effects;  Manager
-	
+	UIInventory* inventory;
+
 	UIScreen* menuScreen;
 	UIScreen* gameScreen;
 	UIBase* startButtonAddress;

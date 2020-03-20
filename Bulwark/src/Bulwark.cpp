@@ -31,11 +31,16 @@ Bulwark::Bulwark()
 	//Sprite Map; Map.setTexture(Content::MapTexture); Map.setTILE_SIZE(4, 4); Map.setTextureRect(IntRect(16, 0, 16, 16));
 	player.setTexture(ContentManager::playerTexture);
 	player.setTileMap(map);
+	player.setIventory(inventory);
 
 	DebugRect::enabled = true;
 	
 	createUI();
 	
+	
+	//inventory->construct();
+	
+
 	// Яблоки
 	Item* item = new Item();
 	(*item).construct(ContentManager::itemSet, sf::IntRect(0, 0, TILE_SIZE, TILE_SIZE));
@@ -47,15 +52,14 @@ Bulwark::Bulwark()
 	ItemManager::addItem(item2);
 
 	// Добавляем яблоко в инвентарь
-	Player::inventory->construct();
-	Player::inventory->getCell(0)->setItem(item);
+	//inventory->getCell(0)->setItem(item);
 }
 
 void Bulwark::createUI()
 {
 	UIScreen* menu = new UIScreen(); 
 	menuScreen = menu;
-	UIButton* startButton = new UIButton("Start", sf::Color::Black, ContentManager::font);
+	UIButton* startButton = new UIButton(menu); //("Start", sf::Color::Black, ContentManager::font);
 	startButton->setPosition(WIDTH / 2 - 100, 350);
 	startButton->setColor(sf::Color::Green);
 	startButton->setScreenParent(menu);
@@ -63,7 +67,7 @@ void Bulwark::createUI()
 	
 	startButtonAddress = startButton;
 
-	UIButton* quitButton = new UIButton("Quit", sf::Color::Black, ContentManager::font);
+	UIButton* quitButton = new UIButton(menu);// ("Quit", sf::Color::Black, ContentManager::font);
 	quitButton->setPosition(WIDTH / 2 - 100, 470);
 	quitButton->setColor(sf::Color::Green);
 	quitButton->setScreenParent(menu);
@@ -75,12 +79,13 @@ void Bulwark::createUI()
 
 	UIScreen* game = new UIScreen(); 
 	gameScreen = game;
-	game->addControl(Player::inventory);
+	//inventory = new UIInventory(game); // Определение inventory
+	//game->addControl(inventory);
 	game->active = false;
 	UIManager::addScreen(game);
 
 	
-	Player::inventory->setScreenParent(game);
+	//inventory->setScreenParent(game);
 }
 
 void Bulwark::pollEnvent()
@@ -123,25 +128,25 @@ void Bulwark::pollEnvent()
 		// Движение колёсика мыши
 		if (event.type == sf::Event::MouseWheelMoved)
 		{
-			if (event.mouseWheel.delta == 1 && Player::inventory->selectedCell >= 1)
-				--Player::inventory->selectedCell;
-			else if (event.mouseWheel.delta == -1 && Player::inventory->selectedCell <= 3)
-				++Player::inventory->selectedCell;
+			if (event.mouseWheel.delta == 1 && inventory->selectedCell >= 1)
+				--inventory->selectedCell;
+			else if (event.mouseWheel.delta == -1 && inventory->selectedCell <= 3)
+				++inventory->selectedCell;
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Num1))
-			Player::inventory->selectedCell = 0;	
+			inventory->selectedCell = 0;	
 		if (Keyboard::isKeyPressed(Keyboard::Num2))
-			Player::inventory->selectedCell = 1;
+			inventory->selectedCell = 1;
 		if (Keyboard::isKeyPressed(Keyboard::Num3))
-			Player::inventory->selectedCell = 2;
+			inventory->selectedCell = 2;
 		if (Keyboard::isKeyPressed(Keyboard::Num4))
-			Player::inventory->selectedCell = 3;
+			inventory->selectedCell = 3;
 		if (Keyboard::isKeyPressed(Keyboard::Num5))
-			Player::inventory->selectedCell = 4;
+			inventory->selectedCell = 4;
 		
 		if (Keyboard::isKeyPressed(Keyboard::Key::Q))
 		{
-			UIInventoryCell* cell = Player::inventory->getSelectedCell();
+			UIInventoryCell* cell = inventory->getSelectedCell();
 			player.dropUp(cell);
 		}
 	}

@@ -40,7 +40,8 @@ public:
 	void setTargetedTile(int x, int y);
 	void moveBy(int TileX, int TileY);
 
-	void setTexture(sf::Texture &playerTex);
+	void setTexture(sf::Texture &playerTex); // —ƒ≈À¿“‹ 
+	void setIventory(UIInventory* inventory); // —ƒ≈À¿“‹ Œ¡ﬂ«¿“≈À‹Õ€Ã
 	void setTileMap(TileMap &map);
 	sf::Vector2f getPosition() const;
 	sf::Vector2i getRoundPos() const;
