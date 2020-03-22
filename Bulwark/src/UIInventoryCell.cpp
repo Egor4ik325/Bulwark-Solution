@@ -4,17 +4,13 @@
 #include "Content.h"
 #include "UIInventory.h"
 
-UIInventoryCell::UIInventoryCell()
-{
-}
-
-UIInventoryCell::UIInventoryCell(UIInventory* inv)
+UIInventoryCell::UIInventoryCell(UIInventory* inv) : UIBase(inv->screenParent)
 {
 	// Запоминаем родителя
 	this->invParent = inv;
 	// Хранимый предмет
 	itemContain = nullptr;
-	//
+	
 	screenParent = invParent->screenParent;
 	//
 	selectedColor = sf::Color::Black;

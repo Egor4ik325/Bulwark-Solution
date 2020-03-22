@@ -3,11 +3,11 @@
 #include "UIManager.h"
 #include "Program.h"
 
-UIWindow::UIWindow()
+UIWindow::UIWindow(UIScreen* screenParent) : UIBase(screenParent)
 {
 	// Окно
-	Visible = true;
-	DragAble = true;
+	visible = true;
+	dragAble = true;
 	rectShape.setSize(sf::Vector2f(300, 200));
 	// Цвета
 	bodyColor = sf::Color(130, 130, 130, 180);
@@ -32,7 +32,7 @@ void UIWindow::updateOver()
 	UIBase::updateOver();
 }
 
-bool UIWindow::getDragAllow()
+bool UIWindow::getDragAllow() const
 {
 	if (screenParent == nullptr)
 		return false;

@@ -16,8 +16,9 @@ using namespace sf;
 
 Bulwark::Bulwark()
 {
+	//Bulwark::player(ContentManager::playerTexture, inventory);
 	// Меню
-	gameIsPlay = false;
+	gamePlay = false;
 	// Карта
 	map.loadFromFile(ContentManager::CONTENT_DIR + "Map.tmx");   // Карта 30x30
 	map.setTileSize(TILE_SIZE);
@@ -31,7 +32,6 @@ Bulwark::Bulwark()
 	//Sprite Map; Map.setTexture(Content::MapTexture); Map.setTILE_SIZE(4, 4); Map.setTextureRect(IntRect(16, 0, 16, 16));
 	player.setTexture(ContentManager::playerTexture);
 	player.setTileMap(map);
-	player.setIventory(inventory);
 
 	DebugRect::enabled = true;
 	
@@ -103,7 +103,7 @@ void Bulwark::pollEnvent()
 				if (UIManager::getMouseOver() == nullptr)
 				{
 					sf::Vector2f MousePos = window.mapPixelToCoords(Mouse::getPosition(window));
-					player.setTargetedTile(MousePos.x, MousePos.y);
+					player.goTo(MousePos.x, MousePos.y);
 				}
 			}
 			if (event.key.code == Mouse::Right)
@@ -112,8 +112,8 @@ void Bulwark::pollEnvent()
 				if (UIManager::getMouseOver() == nullptr)
 				{
 					sf::Vector2f MousePos = window.mapPixelToCoords(Mouse::getPosition(window));
-					player.setTargetedTile(MousePos.x, MousePos.y);
-					player.pking = true;
+					player.goTo(MousePos.x, MousePos.y);
+					player.setPicking(true);
 				}
 			}
 		}
@@ -128,25 +128,25 @@ void Bulwark::pollEnvent()
 		// Движение колёсика мыши
 		if (event.type == sf::Event::MouseWheelMoved)
 		{
-			if (event.mouseWheel.delta == 1 && inventory->selectedCell >= 1)
-				--inventory->selectedCell;
-			else if (event.mouseWheel.delta == -1 && inventory->selectedCell <= 3)
-				++inventory->selectedCell;
+			if (event.mouseWheel.delta == 1 && player.inventory.selectedCell >= 1)
+				--player.inventory.selectedCell;
+			else if (event.mouseWheel.delta == -1 && player.inventory.selectedCell <= 3)
+				++player.inventory.selectedCell;
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Num1))
-			inventory->selectedCell = 0;	
+			player.inventory.selectedCell = 0;
 		if (Keyboard::isKeyPressed(Keyboard::Num2))
-			inventory->selectedCell = 1;
+			player.inventory.selectedCell = 1;
 		if (Keyboard::isKeyPressed(Keyboard::Num3))
-			inventory->selectedCell = 2;
+			player.inventory.selectedCell = 2;
 		if (Keyboard::isKeyPressed(Keyboard::Num4))
-			inventory->selectedCell = 3;
+			player.inventory.selectedCell = 3;
 		if (Keyboard::isKeyPressed(Keyboard::Num5))
-			inventory->selectedCell = 4;
+			player.inventory.selectedCell = 4;
 		
 		if (Keyboard::isKeyPressed(Keyboard::Key::Q))
 		{
-			UIInventoryCell* cell = inventory->getSelectedCell();
+			UIInventoryCell* cell = player.inventory.getSelectedCell();
 			player.dropUp(cell);
 		}
 	}
@@ -220,7 +220,7 @@ void Bulwark::pollEnventMenu()
 				{
 					if (over == startButtonAddress)
 					{
-						gameIsPlay = true;
+						gamePlay = true;
 						UIManager::deleteScreen(menuScreen);
 						gameScreen->active = true;
 					}
@@ -274,6 +274,11 @@ void Bulwark::drawMenu()
 	ItemManager::draw(window);
 	// Debug
 	DebugRect::draw(window);
+}
+
+bool Bulwark::isGamePlay() const
+{
+	return gamePlay;
 }
 
 

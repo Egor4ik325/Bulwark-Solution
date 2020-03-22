@@ -6,22 +6,28 @@
 class Player
 {
 private:
-	sf::Vector2f position;  // Координаты	
-	sf::Vector2f velocity;  // Скорость
+	sf::Vector2f position;      // Координаты	
+	sf::Vector2f velocity;      // Скорость
+	
+	const TileMap *map;         // Карта - только для чтения данных
+	const sf::Texture *texture; // Текстура игрока - только для чтения данных
 
 	bool going;
-
+	bool picking;
 	bool onTile;
-	float speed; int health;
+
+	float speed;
+	int health;
 
 	enum DIR { UP, DOWN, RIGHT, LEFT, UPRIGHT, UPLEFT, DOWNRIGHT, DOWNLEFT, NONE };
+
 	DIR playerDir; DIR targDir;
 
-	TileMap *map;
-
 	// Движение
-	sf::Vector2i targ; sf::Vector2i targT; // Координаты куда идти
-	bool dirGoingFlag; int goneX, goneY;
+	sf::Vector2i targ; 
+	sf::Vector2i targT; // Координаты куда идти
+	bool goingDirFlag; 
+	int goneX, goneY;
 
 	// Анимация
 	float frame;
@@ -29,7 +35,11 @@ private:
 	sf::Sprite effect;
 
 public:
+	UIInventory inventory;      // Инвентарь, для каждого игрока - отдельный
+public:
 	Player();
+	// Передача по ссылке, тк необходимо устранить ошибки
+	Player(const sf::Texture& texture); // СДЕЛАТЬ ОБЯЗАТЕЛЬНЫМ - нет так как нельза передавать nullptr или какой нибудь другой адрес -- можно передать только какую нибудь переменную от которой будет получен адресс
 
 	void update(float time);
 	void draw(sf::RenderTarget & target);
@@ -37,21 +47,21 @@ public:
 	void pickUp();
 	void dropUp(UIInventoryCell* cell);
 	void stop();
-	void setTargetedTile(int x, int y);
+	
 	void moveBy(int TileX, int TileY);
 
-	void setTexture(sf::Texture &playerTex); // СДЕЛАТЬ 
-	void setIventory(UIInventory* inventory); // СДЕЛАТЬ ОБЯЗАТЕЛЬНЫМ
-	void setTileMap(TileMap &map);
+	void goTo(int x, int y);
+	void setTexture(const sf::Texture &playerTex); 
+	void setTileMap(const TileMap &map);
+	void setPicking(bool picking);
+
+	bool isPicking() const;
 	sf::Vector2f getPosition() const;
 	sf::Vector2i getRoundPos() const;
 	sf::Vector2i getTilePos() const;	
 	sf::Vector2i getMiddleTilePos() const;
 	sf::Vector2f getMiddlePos() const;
 
-	static UIInventory *inventory;
-
-	bool pking;
 private:
 	void updateMovement(float time);
 	void targTileDiraction();

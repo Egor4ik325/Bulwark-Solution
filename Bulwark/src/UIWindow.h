@@ -17,11 +17,11 @@ protected:
 	void applyColors();
 public:
 
-	UIWindow();
+	UIWindow(UIScreen* screenParent = nullptr);
 
 	void update() override;
 	void draw(sf::RenderTarget & target) override;
 	void updateOver() override;
 
-	bool getDragAllow() override;
+	bool getDragAllow() const override;
 };

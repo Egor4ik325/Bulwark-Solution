@@ -13,12 +13,10 @@ protected:
 	
 public:
 	unsigned int selectedCell;
-	
-	UIInventory(UIScreen* screenParent);
 
-	//void construct();
+	UIInventory(UIScreen* screenParent = nullptr);
 
-	bool getDragAllow() override;
+	bool getDragAllow() const override;
 	void update() override;
 
 	UIInventoryCell* getCell(unsigned int index);
@@ -26,5 +24,6 @@ public:
 	UIInventoryCell* getSelectedCell();
 
 protected:
+	void createCells();
 	void addCell();
 };

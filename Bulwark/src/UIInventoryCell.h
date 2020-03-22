@@ -15,8 +15,7 @@ public:
 	
 	sf::Color selectedColor;
 public:
-	UIInventoryCell();
-	UIInventoryCell(UIInventory* inv);
+	UIInventoryCell(UIInventory* inventoryParent);
 
 	void update() override;
 	void draw(sf::RenderTarget& target) override;

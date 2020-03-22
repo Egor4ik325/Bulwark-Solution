@@ -87,7 +87,7 @@ void UIManager::deleteScreen(unsigned int index)
 	screens.erase(iter);
 }
 
-void UIManager::deleteScreen(UIScreen* screen)
+void UIManager::deleteScreen(const UIScreen* screen)
 {
 	for (int i = 0; i < screens.size(); i++)
 	{

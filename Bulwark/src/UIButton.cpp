@@ -4,7 +4,7 @@
 #include "DebugRect.h"
 #include <iostream>
 
-UIButton::UIButton(UIScreen* screenParent)
+UIButton::UIButton(UIScreen* screenParent) : UIBase(screenParent)
 {
 	rectShape.setFillColor(sf::Color::White);
 	rectShape.setPosition(100.f, 100.f);
@@ -17,7 +17,7 @@ UIButton::UIButton(UIScreen* screenParent)
 	text.setString("");
 	text.setScale(1, 1);
 
-	DragAble = false;
+	dragAble = false;
 }
 
 //UIButton::UIButton(const std::string& text,const sf::Color& color,const sf::Font& font)

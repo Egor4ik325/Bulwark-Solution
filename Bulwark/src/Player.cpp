@@ -6,18 +6,40 @@
 #include "Program.h"
 #include "UIInventoryCell.h"
 
-UIInventory* Player::inventory;
-
 Player::Player()
 {
+	// Properties
 	position = sf::Vector2f(13 * TILE_SIZE, 11 * TILE_SIZE);
 	velocity = sf::Vector2f(0.f, 0.f);
+	targ = sf::Vector2i(0.f, 0.f);
+	playerDir = DIR::DOWN;
+	frame = 0.f;
+
+	// Flags
+	going = false; picking = false; goingDirFlag = true;
+	goneX = 0; goneY = 0;
+	health = 20;
+	speed = 1.f;
+	onTile = false;
+}
+
+Player::Player(const sf::Texture& texture)
+{
+	// Свойства
+	position = sf::Vector2f(13 * TILE_SIZE, 11 * TILE_SIZE);
+	velocity = sf::Vector2f(0.f, 0.f);
+	
+	// Texture
+	this->texture = &texture;
+	sprite.setTexture(texture); sprite.setTextureRect(sf::IntRect(0, 0, 16, 16)); sprite.setScale(4, 4);
+	effect.setTexture(texture); effect.setTextureRect(sf::IntRect(16, 64, 16, 16)); effect.setScale(4, 4);
 
 	targ = sf::Vector2i(0.f, 0.f);
 	playerDir = DIR::DOWN;
 	frame = 0.f;
 	
-	going = false; pking = false; dirGoingFlag = true;
+	// Flags
+	going = false; picking = false; goingDirFlag = true;
 	goneX = 0; goneY = 0;
 	health = 20; 
 	speed = 1.f;
@@ -26,12 +48,10 @@ Player::Player()
 
 void Player::update(float time)
 {
-	// Проверка на плитки или нет
+	// Checks
 	onTile = ((int)position.x % TILE_SIZE == 0) & ((int)position.y % TILE_SIZE == 0);
-	// Округленные данные 
-	
 
-	//////// Движение ////////
+	// Movement
 	updateMovement(time);
 
 	if (velocity != sf::Vector2f(0.f, 0.f))
@@ -39,15 +59,16 @@ void Player::update(float time)
 
 	// Collision
 	collision();
-	//////// Анимация ////////
+	
+	// Animation
 	animation(time);
 	
-	//////// Рисуем  /////////
+	// Drawing
 	DebugRect::addRect(sf::FloatRect(position.x, position.y, TILE_SIZE, TILE_SIZE), sf::Color::Red);
 	
 	sprite.setPosition(position);
 
-	//////// Обнуляем ////////
+	// Equation to zero
 	velocity = sf::Vector2f(0.f, 0.f);
 	onTile = 0;
 }
@@ -80,7 +101,7 @@ void Player::updateMovement(float time)
 			position = sf::Vector2f(getTilePos() * TILE_SIZE);
 			position = sf::Vector2f(targ);
 
-			if (pking)
+			if (picking)
 				pickUp();
 		}
 
@@ -90,7 +111,7 @@ void Player::updateMovement(float time)
 		// Движение по диагонале
 		if (targDir == UPRIGHT || targDir == UPLEFT || targDir == DOWNRIGHT || targDir == DOWNLEFT)
 		{
-			if (dirGoingFlag)
+			if (goingDirFlag)
 			{
 				if (targDir == UPRIGHT || targDir == DOWNRIGHT) // Вправо
 				{
@@ -101,7 +122,7 @@ void Player::updateMovement(float time)
 					if (rPosition.x + SVector >= NextTile)
 					{
 						goneX = position.x = NextTile;
-						dirGoingFlag = false;
+						goingDirFlag = false;
 					}
 					else
 						velocity.x = speed;
@@ -116,7 +137,7 @@ void Player::updateMovement(float time)
 						if (rPosition.x + SVector <= NextTile)
 						{
 							goneX = position.x = NextTile;
-							dirGoingFlag = false;
+							goingDirFlag = false;
 						}
 						else
 							velocity.x = -speed;
@@ -133,7 +154,7 @@ void Player::updateMovement(float time)
 					if (rPosition.y + SVector >= NextTile)
 					{
 						goneY = position.y = NextTile;
-						dirGoingFlag = true;
+						goingDirFlag = true;
 					}
 					else
 						velocity.y = speed;
@@ -148,7 +169,7 @@ void Player::updateMovement(float time)
 						if (rPosition.y + SVector <= NextTile)
 						{
 							goneY = position.y = NextTile;
-							dirGoingFlag = true;
+							goingDirFlag = true;
 						}
 						else
 							velocity.y = -speed;
@@ -611,10 +632,10 @@ void Player::draw(sf::RenderTarget & target)
 	target.draw(sprite);
 }
 
-void Player::setTargetedTile(int x, int y)
+void Player::goTo(int x, int y)
 {
 	going = true;
-	pking = false;
+	picking = false;
 
 	// Находим точные координаты плитки
 	targT.x = ((int)x / TILE_SIZE) * TILE_SIZE;
@@ -629,12 +650,12 @@ void Player::moveBy(int TileX, int TileY)
 	going = true;
 
 	sf::Vector2i TilePos = getTilePos();
-	setTargetedTile((TilePos.x + TileX) * TILE_SIZE, (TilePos.y + TileY) * TILE_SIZE);
+	goTo((TilePos.x + TileX) * TILE_SIZE, (TilePos.y + TileY) * TILE_SIZE);
 }
 
 void Player::pickUp()
 {
-	pking = false;
+	picking = false;
 
 	Item* item = ItemManager::getItem(getMiddlePos());
 	if (item == nullptr)
@@ -642,7 +663,7 @@ void Player::pickUp()
 	if (item->onGround == false)
 		return;
 
-	UIInventoryCell* cell = inventory->getFirstEmptyCell();
+	UIInventoryCell* cell = inventory.getFirstEmptyCell();
 	if (cell == nullptr)
 		return;
 	
@@ -661,23 +682,23 @@ void Player::dropUp(UIInventoryCell * cell)
 
 void Player::stop()
 {
-	setTargetedTile(getMiddleTilePos().x, getMiddleTilePos().y);
+	goTo(getMiddleTilePos().x, getMiddleTilePos().y);
 }
 
-void Player::setTexture(sf::Texture & playerTex)
+void Player::setTexture(const sf::Texture& playerTex)
 {
 	sprite.setTexture(playerTex); sprite.setTextureRect(sf::IntRect(0, 0, 16, 16)); sprite.setScale(4, 4);
 	effect.setTexture(playerTex); effect.setTextureRect(sf::IntRect(16, 64, 16, 16)); effect.setScale(4, 4);
 }
 
-void Player::setIventory(UIInventory * inventory)
-{
-	this->inventory = inventory;
-}
-
-void Player::setTileMap(TileMap & map)
+void Player::setTileMap(const TileMap & map)
 {
 	this->map = &map;
+}
+
+void Player::setPicking(bool picking)
+{
+	this->picking = picking;
 }
 
 sf::Vector2i Player::getRoundPos() const
@@ -705,6 +726,11 @@ sf::Vector2f Player::getMiddlePos() const
 {
 	sf::Vector2f tileSizeHalf(TILE_SIZE / 2, TILE_SIZE / 2);
 	return position + tileSizeHalf;
+}
+
+bool Player::isPicking() const
+{
+	return picking;
 }
 
 sf::Vector2f Player::getPosition() const

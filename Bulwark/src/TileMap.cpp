@@ -166,33 +166,33 @@ void TileMap::draw(sf::RenderTarget & target)
 			target.draw(layers[layer].tiles[tile]);
 }
 
-int TileMap::getTileId(int x, int y)
+int TileMap::getTileId(int x, int y) const
 {
 	// Преобразуем pixel в тайлы
 	int TileX = x / TILE_SIZE;
 	int TileY = y / TILE_SIZE;
 	// Тайлы в пределах карты
 	if (TileX > width - 1)
-		return NULL;
+		return 0;
 	if (TileY > height - 1)
-		return NULL;
+		return 0;
 	// Берем Id самого верхнего слоя
 	int layer = layers.size(); layer--;
 
 	return layers[layer].tilesId[TileX + TileY * width] - 1;
 }
 
-int TileMap::getTileId(Vector2i TilePos)
+int TileMap::getTileId(Vector2i TilePos) const
 {
 	return getTileId(TilePos.x, TilePos.y);
 }
 
-TileMap::TileType TileMap::getTileType(int x, int y)
+TileMap::TileType TileMap::getTileType(int x, int y) const
 {
 	return typeArr[getTileId(x, y)];
 }
 
-TileMap::TileType TileMap::getTileType(const Vector2i &TilePos)
+TileMap::TileType TileMap::getTileType(const Vector2i &TilePos) const
 {
 	return typeArr[getTileId(TilePos.x, TilePos.y)];
 }

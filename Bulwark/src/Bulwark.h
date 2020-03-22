@@ -3,23 +3,23 @@
 #include "Player.h"
 #include "TileMap.h"
 
-class Bulwark
+class Bulwark // УСТРАНИТЬ ОШИБКУ ИЗ ВЕКТОРА
 {
 private:
-	Player player;  
+	Player player;
 	TileMap map;
 	sf::View view;
 	sf::Clock clock; float time;
 	//std::list <Effect> Effects;  Manager
-	UIInventory* inventory;
 
-	UIScreen* menuScreen;
+	// Указатели - храним адреса (не null)
+	const UIScreen* menuScreen;
 	UIScreen* gameScreen;
-	UIBase* startButtonAddress;
-	UIBase* quitButtonAddress;
+	const UIBase* startButtonAddress;
+	const UIBase* quitButtonAddress;
 	
+	bool gamePlay;
 public:
-	bool gameIsPlay;
 
 	Bulwark();
 	void pollEnvent();
@@ -30,6 +30,7 @@ public:
 	void updateMenu();
 	void drawMenu();
 
+	bool isGamePlay() const;
 private:
 	void createUI();
 	void drawText(const char* text, float data, sf::Vector2i position, const char* count = "%.4f");

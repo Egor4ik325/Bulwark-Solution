@@ -23,10 +23,10 @@ public:
 	void setTileSize(const int TileSize);	            
 	void setTileType(int id, TileType type);	             
 											             
-	int getTileId(int x, int y);			             
-	int getTileId(sf::Vector2i TilePos);	             
-	TileType getTileType(int x, int y);		        
-	TileType getTileType(const sf::Vector2i &TilePos);   
+	int getTileId(int x, int y) const;			             
+	int getTileId(sf::Vector2i TilePos) const;	             
+	TileType getTileType(int x, int y) const;		        
+	TileType getTileType(const sf::Vector2i &TilePos) const;   
 
 private:
 

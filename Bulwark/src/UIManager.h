@@ -22,7 +22,7 @@ public:
 	static UIBase* getMouseDrag();
 	static void addScreen(UIScreen *screen);
 	static void deleteScreen(unsigned int index);
-	static void deleteScreen(UIScreen* screen);
+	static void deleteScreen(const UIScreen* screen);
 
 	static UIScreen* getScreen(unsigned int index);
 

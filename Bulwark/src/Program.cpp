@@ -5,7 +5,7 @@ const int WIDTH = 1024;
 const int HEIGHT = 640;
 const int TILE_SIZE = 64;
 
-sf::Vector2f GetOffSet(sf::View view)
+sf::Vector2f GetOffSet(sf::View view) 
 {
 	sf::Vector2f offSet;
 	sf::Vector2f ViewCenter = view.getCenter();
@@ -16,14 +16,14 @@ sf::Vector2f GetOffSet(sf::View view)
 	return offSet;
 }
 
-sf::Vector2f GetViewOffSet()
+sf::Vector2f GetViewOffSet() 
 {
 	sf::Vector2f offset;
 	offset = window.mapPixelToCoords(sf::Vector2i(0, 0));
 	return offset;
 }
 
-sf::Transform GetViewTransformOffSet()
+const sf::Transform& GetViewTransformOffSet()
 {
 	sf::Transform transformOffSet;
 	transformOffSet.translate(window.mapPixelToCoords(sf::Vector2i(0, 0)));

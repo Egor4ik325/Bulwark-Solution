@@ -19,13 +19,15 @@ int main()
 	window.setMouseCursor(cursor);
 	//system("help");
 
+	sf::Sprite();
+
 	// Content
 	ContentManager::loadContent();
 	
 	// Main class
-	Bulwark game;
+	Bulwark program;
 
-	std::cout << "Bulwark size: " << sizeof(game) << " bytes" << std::endl;
+	std::cout << "Bulwark size: " << sizeof(program) << " bytes" << std::endl;
 	
 	// Main loop
 	while (window.isOpen())
@@ -35,18 +37,18 @@ int main()
 		window.clear(sf::Color::White);
 		//system("cls");
 
-		if (game.gameIsPlay) {
+		if (program.isGamePlay()) {
 			// Input 
-			game.pollEnvent();
+			program.pollEnvent();
 			// Update
-			game.update();
+			program.update();
 			// Draw
-			game.draw();
+			program.draw();
 		}
 		else {
-			game.pollEnventMenu();
-			game.updateMenu();
-			game.drawMenu();
+			program.pollEnventMenu();
+			program.updateMenu();
+			program.drawMenu();
 		}
 
 		window.display();

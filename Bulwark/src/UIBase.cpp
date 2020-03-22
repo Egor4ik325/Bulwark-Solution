@@ -5,12 +5,12 @@
 
 #include "UIScreen.h"
 
-UIBase::UIBase()
+UIBase::UIBase(UIScreen* screenParent)
 {
 	// Ïðèñâàèâàåì íà÷àëüíûå äàííûå
-	Visible = true;
-	DragAble = false;
-	screenParent = nullptr;
+	visible = true;
+	dragAble = false;
+	this->screenParent = screenParent;
 	rectShape.setFillColor(sf::Color::White);
 	rectShape.setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
 	rectShape.setPosition(0.f, 0.f);
@@ -18,17 +18,9 @@ UIBase::UIBase()
 	dragOffset = { 0.f, 0.f };
 }
 
-bool UIBase::getDragAllow()
-{
-	if (screenParent == nullptr)
-		return false;
-
-	return (rectShape.getGlobalBounds().contains(GetMouseCoords()) || screenParent->drag == this) && GetMouseLeft();
-}
-
 void UIBase::draw(sf::RenderTarget &target)
 {
-	if (Visible)
+	if (visible)
 	{	
 		target.draw(rectShape, GetViewTransformOffSet());
 	}
@@ -50,7 +42,7 @@ void UIBase::updateOver()
 	{
 		std::cout << "Intersect!! \n" ;
 		
-		if (DragAble && getDragAllow())
+		if (dragAble && getDragAllow())
 		{
 			// Åñëè íå ïåðåäâèãàåì 
 			//ÝÒÎÒ ÊÎÄ ÂÛÏÎËÍßÅÒÑß 1 ÐÀÇ ÂÍÀ×ÀËÅ ÏÅÐÅÒÀÑÊÈÂÀÍÈß
@@ -86,8 +78,7 @@ void UIBase::onDrop()
 void UIBase::onCancelDrag()
 {
 }
-
-////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////
 void UIBase::setPosition(sf::Vector2f position)
 {
 	rectShape.setPosition(position);
@@ -95,7 +86,7 @@ void UIBase::setPosition(sf::Vector2f position)
 
 void UIBase::setPosition(float x, float y)
 {
-	setPosition(sf::Vector2f(x, y));
+	rectShape.setPosition(sf::Vector2f(x, y));
 }
 
 void UIBase::setSize(sf::Vector2f size)
@@ -110,7 +101,15 @@ void UIBase::setScreenParent(UIScreen * parent)
 
 void UIBase::setSize(float x, float y)
 {
-	setSize(sf::Vector2f(x, y));
+	rectShape.setSize(sf::Vector2f(x, y));
+}
+
+bool UIBase::getDragAllow() const
+{
+	if (screenParent == nullptr)
+		return false;
+
+	return (rectShape.getGlobalBounds().contains(GetMouseCoords()) || screenParent->drag == this) && GetMouseLeft();
 }
 
 sf::Vector2f UIBase::getPosition() const
@@ -124,11 +123,12 @@ sf::Vector2f UIBase::getGlobalPosition() const
 	return coords;
 }
 
-sf::FloatRect UIBase::getGlobalBounds() const
+const sf::FloatRect& UIBase::getGlobalBounds() const
 {
 	sf::FloatRect globalBounds = rectShape.getGlobalBounds();
 	globalBounds.left += GetViewOffSet().x;
 	globalBounds.top += GetViewOffSet().y;
+
 	return globalBounds;
 }
 
@@ -137,7 +137,7 @@ sf::Vector2f UIBase::getDragOffSet() const
 	return dragOffset;
 }
 
-sf::RectangleShape* UIBase::getRectShape()
+const sf::RectangleShape& UIBase::getRectShape() const
 {
-	return &rectShape;
+	return rectShape;
 }
