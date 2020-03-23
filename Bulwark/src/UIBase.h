@@ -32,7 +32,7 @@ public:
 	void setSize(float x, float y);
 	void setSize(sf::Vector2f size);
 
-	virtual bool getDragAllow() const;
+	virtual bool isDragAllow() const;
 
 	sf::Vector2f getPosition() const;
 	sf::Vector2f getGlobalPosition()  const;

@@ -1,10 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-
 #include "UIBase.h"
-#include "Item.h"
+
 
 class UIInventory;
+class Item;
 
 class UIInventoryCell : public UIBase
 {

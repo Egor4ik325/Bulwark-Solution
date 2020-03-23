@@ -30,7 +30,7 @@ void UIScreen::updateDrag()
 	if (drag != nullptr)
 	{
 		// Если все ещё разрешено
-		if ((*drag).getDragAllow())
+		if ((*drag).isDragAllow())
 		{
 			sf::Vector2f NextPos = GetMouseCoords() - (*drag).getDragOffSet();
 	

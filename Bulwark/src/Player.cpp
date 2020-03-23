@@ -1,5 +1,5 @@
 #include "Player.h"
-
+#include "TileMap.h"
 #include "DebugRect.h"
 #include "UIManager.h"
 #include "ItemManager.h"

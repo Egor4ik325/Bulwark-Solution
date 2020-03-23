@@ -32,7 +32,7 @@ void UIWindow::updateOver()
 	UIBase::updateOver();
 }
 
-bool UIWindow::getDragAllow() const
+bool UIWindow::isDragAllow() const
 {
 	if (screenParent == nullptr)
 		return false;

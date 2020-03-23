@@ -42,7 +42,7 @@ void UIBase::updateOver()
 	{
 		std::cout << "Intersect!! \n" ;
 		
-		if (dragAble && getDragAllow())
+		if (dragAble && isDragAllow())
 		{
 			// Åñëè íå ïåðåäâèãàåì 
 			//ÝÒÎÒ ÊÎÄ ÂÛÏÎËÍßÅÒÑß 1 ÐÀÇ ÂÍÀ×ÀËÅ ÏÅÐÅÒÀÑÊÈÂÀÍÈß
@@ -104,7 +104,7 @@ void UIBase::setSize(float x, float y)
 	rectShape.setSize(sf::Vector2f(x, y));
 }
 
-bool UIBase::getDragAllow() const
+bool UIBase::isDragAllow() const
 {
 	if (screenParent == nullptr)
 		return false;

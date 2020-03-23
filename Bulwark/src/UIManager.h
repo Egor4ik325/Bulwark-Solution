@@ -1,12 +1,13 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include <vector>
-#include "UIBase.h"
 #include "UIScreen.h"
+
+
+class UIBase;
 
 // ¬спомогательный cтатический класс, хран€щий UI и помагающий взаимодействовать с ними 
 // ќн будет доступен дл€ всех классов
-
 class UIManager
 {
 private:

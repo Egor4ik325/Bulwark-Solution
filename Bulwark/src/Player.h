@@ -1,7 +1,8 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "TileMap.h"
 #include "UIInventory.h"
+
+class TileMap;
 
 class Player
 {
@@ -67,6 +68,4 @@ private:
 	void targTileDiraction();
 	void collision();
 	void animation(float time);
-
-
 };

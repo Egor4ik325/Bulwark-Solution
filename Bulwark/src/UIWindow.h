@@ -23,5 +23,5 @@ public:
 	void draw(sf::RenderTarget & target) override;
 	void updateOver() override;
 
-	bool getDragAllow() const override;
+	bool isDragAllow() const override;
 };

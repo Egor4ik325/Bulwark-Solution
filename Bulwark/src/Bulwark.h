@@ -3,6 +3,9 @@
 #include "Player.h"
 #include "TileMap.h"
 
+class TileMap;
+class UIScreen;
+
 class Bulwark // сярпюмхрэ ньхайс хг бейрнпю
 {
 private:

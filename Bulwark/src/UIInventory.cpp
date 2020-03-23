@@ -17,9 +17,9 @@ UIInventory::UIInventory(UIScreen* screenParent) : UIWindow(screenParent)
 		createCells();
 }
 
-bool UIInventory::getDragAllow() const
+bool UIInventory::isDragAllow() const
 {
-	return UIBase::getDragAllow();
+	return UIBase::isDragAllow();
 }
 
 void UIInventory::update()

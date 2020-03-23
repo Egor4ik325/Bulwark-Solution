@@ -1,7 +1,7 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "UIWindow.h"
 #include <vector>
+#include "UIWindow.h"
 #include "UIInventoryCell.h"
 
 class UIInventory : public UIWindow
@@ -16,7 +16,7 @@ public:
 
 	UIInventory(UIScreen* screenParent = nullptr);
 
-	bool getDragAllow() const override;
+	bool isDragAllow() const override;
 	void update() override;
 
 	UIInventoryCell* getCell(unsigned int index);

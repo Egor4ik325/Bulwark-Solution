@@ -1,5 +1,5 @@
 #include "UIInventoryCell.h"
-
+#include "Item.h"
 #include "Program.h"
 #include "Content.h"
 #include "UIInventory.h"
