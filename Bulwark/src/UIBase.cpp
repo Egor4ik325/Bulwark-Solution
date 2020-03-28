@@ -1,12 +1,11 @@
 #include "UIBase.h"
 #include <iostream>
-#include "Program.h"
+#include "Global.h"
 #include "UIManager.h"
 
 #include "UIScreen.h"
 
-UIBase::UIBase(UIScreen* screenParent): 
-	screenParent(screenParent)
+UIBase::UIBase(UIScreen* screenParent): screenParent(screenParent)
 {
 	visible = true;
 	dragAble = false;
@@ -36,28 +35,27 @@ void UIBase::updateOver()
 	if (screenParent == nullptr) return;
 
 	// Если курсор пересекся с Интерфейсом
-	auto mouseLocalPos = getMouseLocalPos();
-	if (rectShape.getGlobalBounds().contains(mouseLocalPos))
+	if (rectShape.getGlobalBounds().contains(getMouseLocalPos()))
 	{
+		
 		std::cout << "Intersect!! \n" ;
 		
 		if (dragAble && isDragAllow())
 		{
-			// Если не передвигаем 
+			// Если еще не передвигаем 
 			//ЭТОТ КОД ВЫПОЛНЯЕТСЯ 1 РАЗ ВНАЧАЛЕ ПЕРЕТАСКИВАНИЯ
 			if (screenParent->drag == nullptr)
-			{
+			{				
 				// Если способны передвигать
 				//if (IsMouseLeft())
-				{
-					screenParent->drag = this;
-					//auto mouseLocalPos2 = getMouseLocalPos();
-					dragOffset = mouseLocalPos - rectShape.getPosition();
 
-					onDragBegin();
+				screenParent->drag = this;
+				dragOffset = getMouseLocalPos() - rectShape.getPosition();
+				
+				onDragBegin();
+				
 
-					std::cout << "START MOVING!! \n";
-				}
+				std::cout << "START MOVING!! \n";
 			}
 		}
 
@@ -81,6 +79,14 @@ void UIBase::onCancelDrag()
 {
 
 }
+
+bool UIBase::isDragAllow() const
+{
+	if (screenParent == nullptr) return false;
+
+	return (rectShape.getGlobalBounds().contains(getMouseLocalPos()) || screenParent->drag == this) && isMouseLeft();
+}
+
 ////////////////////////////////////////////////////////////////////////////////////
 void UIBase::setPosition(sf::Vector2f position)
 {
@@ -102,24 +108,3 @@ void UIBase::setSize(float x, float y)
 	rectShape.setSize(sf::Vector2f(x, y));
 }
 
-bool UIBase::isDragAllow() const
-{
-	if (screenParent == nullptr) return false;
-
-	return (rectShape.getGlobalBounds().contains(getMouseLocalPos()) || screenParent->drag == this) && isMouseLeft();
-}
-
-//sf::Vector2f UIBase::getGlobalPosition() const
-//{
-//	sf::Vector2f coords = rectShape.getPosition() + GetViewOffSet();
-//	return coords;
-//}
-//
-//const sf::FloatRect& UIBase::getGlobalBounds() const
-//{
-//	sf::FloatRect globalBounds = rectShape.getGlobalBounds();
-//	globalBounds.left += GetViewOffSet().x;
-//	globalBounds.top += GetViewOffSet().y;
-//
-//	return globalBounds;
-//}

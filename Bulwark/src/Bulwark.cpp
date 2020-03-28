@@ -1,6 +1,6 @@
 #include "Bulwark.h"
 
-#include "Program.h"
+#include "Global.h"
 #include "DebugRect.h"
 #include "UIManager.h"
 #include "ItemManager.h"
@@ -14,7 +14,6 @@ using namespace sf;
 
 Bulwark::Bulwark()
 {
-	//Bulwark::player(ContentManager::playerTexture, inventory);
 	// Меню
 	gamePlay = false;
 	// Карта
@@ -39,7 +38,7 @@ Bulwark::Bulwark()
 
 	// Инициализируем Inventory
 	player.inventory.setScreenParent(gameScreen);
-	player.inventory.createCells();
+	//player.inventory.;
 
 	// Яблоки
 	Item* item = new Item();
@@ -108,6 +107,7 @@ void Bulwark::pollEnvent()
 				}
 			}
 		}
+		
 		if (event.type == sf::Event::MouseLeft)
 		{
 

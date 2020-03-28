@@ -3,7 +3,7 @@
 
 #include "Bulwark.h"
 #include "Content.h"
-#include "Program.h"
+#include "Global.h"
 
 int main()
 {

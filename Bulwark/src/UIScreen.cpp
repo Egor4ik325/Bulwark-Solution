@@ -1,5 +1,5 @@
 #include "UIScreen.h"
-#include "Program.h"
+#include "Global.h"
 #include "UIManager.h"
 
 UIScreen::UIScreen()
@@ -36,20 +36,21 @@ void UIScreen::updateDrag()
 	if (drag != nullptr)
 	{
 		// Если все ещё разрешено
-		if ((*drag).isDragAllow())
+		if (drag->isDragAllow())
 		{
-			sf::Vector2f NextPos = getMouseLocalPos() - drag->getDragOffSet() + GetViewOffSet();
-	
-			drag->setPosition(sf::Vector2f(window.mapPixelToCoords((sf::Vector2i)NextPos)));
+			// Отнимаем от позиции мыши расстояник которые должно быть между UI и мышью,
+			// и получаем следующее расстояние
+			sf::Vector2f nextPos = getMouseLocalPos() - drag->getDragOffSet();
+			drag->setPosition(nextPos);
 		}
 		// Если уже не разрешено
 		else
 		{
 			// Если под курсором что-то есть
 			if (over != nullptr)
-				(*drag).onDrop();
+				drag->onDrop();
 			else
-				(*drag).onCancelDrag();
+				drag->onCancelDrag();
 	
 			// Отпускаем
 			drag = nullptr;

@@ -1,6 +1,6 @@
 #include "ItemManager.h"
 #include <iostream>
-#include "Program.h"
+#include "Global.h"
 
 std::vector <Item*> ItemManager::items;
 ItemInfo ItemManager::itemInfoArr[];

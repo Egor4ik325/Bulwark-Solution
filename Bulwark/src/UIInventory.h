@@ -15,6 +15,7 @@ public:
 	unsigned int selectedCell;
 
 	UIInventory(UIScreen* screenParent = nullptr);
+
 	void createCells();
 
 	bool isDragAllow() const override;

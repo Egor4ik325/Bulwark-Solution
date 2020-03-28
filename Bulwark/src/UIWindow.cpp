@@ -1,7 +1,7 @@
 #include "UIWindow.h"
 
 #include "UIManager.h"
-#include "Program.h"
+#include "Global.h"
 
 UIWindow::UIWindow(UIScreen* screenParent): UIBase(screenParent)
 {

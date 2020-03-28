@@ -1,6 +1,6 @@
 #include "UIInventory.h"
 
-#include "Program.h"
+#include "Global.h"
 #include "UIManager.h"
 #include "Content.h"
 #include "Item.h"

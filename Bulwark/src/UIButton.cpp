@@ -1,6 +1,6 @@
 #include "UIButton.h"
 #include "UIScreen.h"
-#include "Program.h"
+#include "Global.h"
 #include "DebugRect.h"
 #include <iostream>
 

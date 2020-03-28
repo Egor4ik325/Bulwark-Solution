@@ -3,7 +3,7 @@
 #include "DebugRect.h"
 #include "UIManager.h"
 #include "ItemManager.h"
-#include "Program.h"
+#include "Global.h"
 #include "UIInventoryCell.h"
 
 Player::Player()

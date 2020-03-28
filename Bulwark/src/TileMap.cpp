@@ -3,7 +3,7 @@
 #include "tinyxml.h"
 #include <iostream>
 #include <map>
-#include "Program.h"
+#include "Global.h"
 
 
 using namespace sf;

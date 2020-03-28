@@ -1,11 +1,6 @@
 #include "Item.h"
-#include "Program.h"
+#include "Global.h"
 #include "ItemManager.h"
-///////////////////////////
-Item::Item()
-{
-	
-}
 
 Item::Item(const sf::Texture & texture, sf::IntRect TextureRect, int Scale)
 {
