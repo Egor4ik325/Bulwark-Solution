@@ -67,19 +67,24 @@ UIBase* UIManager::getMouseDrag()
 	return drag;
 }
 
-void UIManager::addScreen(UIScreen* uiscreen)
+void UIManager::addScreen(UIScreen * uiscreen)
 {
 	screens.push_back(uiscreen);
+}
+
+void UIManager::addScreen(UIScreen & screen)
+{
+	screens.push_back(&screen);
 }
 
 void UIManager::deleteScreen(unsigned int index)
 {
 	if (index > screens.size()) return;
 
-	// Удаляем из динамической памяти
-	UIScreen* screen = screens[index];
-	screen->deleteControls();
-	delete screens[index];
+	//// Удаляем из динамической памяти
+	//UIScreen* screen = screens[index];
+	//screen->deleteControls();
+	//delete screens[index];
 
 	// Удаляем из списка
 	std::vector <UIScreen*>::iterator iter = screens.begin();
@@ -87,7 +92,7 @@ void UIManager::deleteScreen(unsigned int index)
 	screens.erase(iter);
 }
 
-void UIManager::deleteScreen(const UIScreen* screen)
+void UIManager::deleteScreen(const UIScreen * screen)
 {
 	for (int i = 0; i < screens.size(); i++)
 	{
@@ -97,6 +102,11 @@ void UIManager::deleteScreen(const UIScreen* screen)
 			return;
 		}
 	}
+}
+
+void UIManager::deleteScreen(const UIScreen & screen)
+{
+	deleteScreen(&screen);
 }
 
 UIScreen * UIManager::getScreen(unsigned int index)

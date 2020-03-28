@@ -26,7 +26,7 @@ void Item::draw(sf::RenderTarget &target)
 	if (onGround)
 		target.draw(sprite);
 	else
-		target.draw(sprite, GetViewTransformOffSet());
+		target.draw(sprite, getViewTransformOffSet());
 }
 
 sf::Vector2f Item::getGlobalPosition()

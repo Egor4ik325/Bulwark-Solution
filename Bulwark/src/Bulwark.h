@@ -2,11 +2,12 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "TileMap.h"
+#include "UIScreen.h"
+#include "UIBase.h"
+#include "UIWindow.h"
+#include "UIButton.h"
 
-class TileMap;
-class UIScreen;
-
-class Bulwark // УСТРАНИТЬ ОШИБКУ ИЗ ВЕКТОРА
+class Bulwark
 {
 private:
 	Player player;
@@ -15,11 +16,10 @@ private:
 	sf::Clock clock; float time;
 	//std::list <Effect> Effects;  Manager
 
-	// Указатели - храним адреса (не null)
-	const UIScreen* menuScreen;
-	UIScreen* gameScreen;
-	const UIBase* startButtonAddress;
-	const UIBase* quitButtonAddress;
+	// UI
+	UIScreen menuScreen, gameScreen;
+	UIWindow win;
+	UIButton start, quit;
 	
 	bool gamePlay;
 public:
@@ -35,7 +35,7 @@ public:
 
 	bool isGamePlay() const;
 private:
-	void createUI();
+	void addUI();
 	void drawText(const char* text, float data, sf::Vector2i position, const char* count = "%.4f");
 };
 

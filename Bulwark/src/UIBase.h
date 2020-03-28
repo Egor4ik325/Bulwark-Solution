@@ -26,7 +26,9 @@ public:
 	virtual void onDrop();
 	virtual void onCancelDrag();
 
-	void setScreenParent(UIScreen* parent);
+	inline void setScreenParent(UIScreen* parent) { screenParent = parent; };
+	inline void setScreenParent(UIScreen& parent) { screenParent = &parent; };
+	
 	void setPosition(float x, float y);
 	void setPosition(sf::Vector2f position);
 	void setSize(float x, float y);
@@ -34,9 +36,8 @@ public:
 
 	virtual bool isDragAllow() const;
 
-	sf::Vector2f getPosition() const;
-	sf::Vector2f getGlobalPosition()  const;
-	sf::Vector2f getDragOffSet() const;
+	inline sf::Vector2f getPosition() { return rectShape.getPosition(); };
+	inline sf::Vector2f getDragOffSet() { return dragOffset; };
 	const sf::FloatRect& getGlobalBounds() const;
-	const sf::RectangleShape& getRectShape() const;
+	inline const sf::RectangleShape& getRectShape() const { return rectShape; };
 };

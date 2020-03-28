@@ -10,6 +10,7 @@ UIInventoryCell::UIInventoryCell(UIInventory* inv) : UIBase(inv->screenParent)
 	this->invParent = inv;
 	// Хранимый предмет
 	itemContain = nullptr;
+	dragAble = true;
 	
 	screenParent = invParent->screenParent;
 	//
@@ -26,6 +27,7 @@ void UIInventoryCell::update()
 
 	if (itemContain != nullptr)
 	{
+		// Двигаем Item внутри
 		itemContain->setPosition(rectShape.getPosition());
 	}
 }

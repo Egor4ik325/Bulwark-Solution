@@ -13,8 +13,26 @@ UIInventory::UIInventory(UIScreen* screenParent) : UIWindow(screenParent)
 	bodyColor = sf::Color(256, 256, 256, 100);
 	selectedCell = 0;
 
-	if (screenParent != nullptr)
-		createCells();
+	createCells();
+}
+
+void UIInventory::createCells()
+{
+	if (screenParent == nullptr) return;
+
+	cellCount = 5;
+	rectShape.setSize(sf::Vector2f(cellCount * 64 + 64, 64));
+	for (int i = 0; i < cellCount; i++)
+		addCell();
+}
+
+void UIInventory::addCell()
+{
+	UIInventoryCell* cell = new UIInventoryCell(this);
+	(*cell).setPosition(cells.size() * (*cell).getRectShape().getSize().x, 0);
+	cell->setScreenParent(this->screenParent);
+	this->screenParent->addControl(cell);
+	cells.push_back(cell);
 }
 
 bool UIInventory::isDragAllow() const
@@ -30,28 +48,12 @@ void UIInventory::update()
 	for (int i = 0; i < cellCount; i++)
 	{
 		cells[i]->update();
-		cells[i]->setPosition(rectShape.getPosition() + sf::Vector2f(i * TILE_SIZE,0));
+
+		if (!cells[i]->isDragAllow())
+			cells[i]->setPosition(rectShape.getPosition() + sf::Vector2f(i * TILE_SIZE, 0));
 	}
 }
 
-void UIInventory::createCells()
-{
-	cellCount = 5;
-	rectShape.setSize(sf::Vector2f(cellCount * 64 + 64, 64));
-	for (int i = 0; i < cellCount; i++)
-		addCell();
-}
-
-void UIInventory::addCell()
-{
-	UIInventoryCell* cell = new UIInventoryCell(this);
-	(*cell).setPosition(cells.size() * (*cell).getRectShape().getSize().x, 0);
-	cell->setScreenParent(screenParent);
-
-	cell->screenParent->addControl(cell);
-
-    cells.push_back(cell);
-}
 UIInventoryCell * UIInventory::getFirstEmptyCell()
 {
 	for (UIInventoryCell* cell : cells)
@@ -62,10 +64,12 @@ UIInventoryCell * UIInventory::getFirstEmptyCell()
 	
 	return nullptr;
 }
+
 UIInventoryCell * UIInventory::getSelectedCell()
 {
 	return getCell(selectedCell);
 }
+
 UIInventoryCell* UIInventory::getCell(unsigned int index)
 {
 	if (index > cells.size())

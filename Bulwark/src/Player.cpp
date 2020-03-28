@@ -10,40 +10,20 @@ Player::Player()
 {
 	// Properties
 	position = sf::Vector2f(13 * TILE_SIZE, 11 * TILE_SIZE);
-	velocity = sf::Vector2f(0.f, 0.f);
-	targ = sf::Vector2i(0.f, 0.f);
 	playerDir = DIR::DOWN;
 	frame = 0.f;
-
-	// Flags
-	going = false; picking = false; goingDirFlag = true;
-	goneX = 0; goneY = 0;
 	health = 20;
 	speed = 1.f;
-	onTile = false;
+	// Flags
+	goingDirFlag = true;
 }
 
-Player::Player(const sf::Texture& texture)
+Player::Player(const sf::Texture& texture) : Player()
 {
-	// Свойства
-	position = sf::Vector2f(13 * TILE_SIZE, 11 * TILE_SIZE);
-	velocity = sf::Vector2f(0.f, 0.f);
-	
-	// Texture
 	this->texture = &texture;
+	// Texture
 	sprite.setTexture(texture); sprite.setTextureRect(sf::IntRect(0, 0, 16, 16)); sprite.setScale(4, 4);
 	effect.setTexture(texture); effect.setTextureRect(sf::IntRect(16, 64, 16, 16)); effect.setScale(4, 4);
-
-	targ = sf::Vector2i(0.f, 0.f);
-	playerDir = DIR::DOWN;
-	frame = 0.f;
-	
-	// Flags
-	going = false; picking = false; goingDirFlag = true;
-	goneX = 0; goneY = 0;
-	health = 20; 
-	speed = 1.f;
-	onTile = false;
 }
 
 void Player::update(float time)

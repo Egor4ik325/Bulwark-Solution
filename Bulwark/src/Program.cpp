@@ -23,11 +23,27 @@ sf::Vector2f GetViewOffSet()
 	return offset;
 }
 
-const sf::Transform& GetViewTransformOffSet()
+const sf::Transform& getViewTransformOffSet()
 {
 	sf::Transform transformOffSet;
 	transformOffSet.translate(window.mapPixelToCoords(sf::Vector2i(0, 0)));
 	return transformOffSet;
+}
+
+sf::Vector2f getMouseLocalPos()
+{
+	return (sf::Vector2f)sf::Mouse::getPosition(window);
+}
+
+sf::Vector2f getMouseGlobalPos()
+{
+	sf::Vector2i mouseLocalPos = sf::Mouse::getPosition(window);
+	return window.mapPixelToCoords(mouseLocalPos);
+}
+
+bool isMouseLeft()
+{
+	return sf::Mouse::isButtonPressed(sf::Mouse::Left);
 }
 
 sf::Vector2f GetMouseCoords()

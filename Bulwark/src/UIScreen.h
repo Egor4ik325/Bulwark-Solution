@@ -2,7 +2,7 @@
 #include "SFML/Graphics.hpp"
 #include "UIBase.h"
 
-// Экран интерфейсов
+// Экран - массим интерфейсов
 class UIScreen
 {
 public:
@@ -13,10 +13,15 @@ public:
 
 public:
 
+	UIScreen();
+
 	void update();
 	void draw(sf::RenderTarget &target);
 
-	void addControl(UIBase *ControlAdress);
+	// Передаем UI для добавления в Managment
+	void addControl(UIBase* control);
+	void addControl(UIBase& control);
+
 	void deleteControl(unsigned int index);
 	void deleteControls();
 	bool mouseIntersect();

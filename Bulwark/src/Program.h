@@ -5,8 +5,8 @@ extern sf::RenderWindow window;
 extern const int HEIGHT, WIDTH;  // Размеры окна
 extern const int TILE_SIZE;
 
+const sf::Transform& getViewTransformOffSet() ;
 sf::Vector2f GetViewOffSet();
-const sf::Transform& GetViewTransformOffSet() ;
-sf::Vector2f GetMouseCoords() ;
-bool GetMouseLeft();
-bool IntersectsWithMouse(const sf::FloatRect& rect) ;
+sf::Vector2f getMouseLocalPos();
+sf::Vector2f getMouseGlobalPos();
+bool isMouseLeft();

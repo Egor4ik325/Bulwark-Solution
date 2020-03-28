@@ -3,7 +3,7 @@
 #include "UIManager.h"
 #include "Program.h"
 
-UIWindow::UIWindow(UIScreen* screenParent) : UIBase(screenParent)
+UIWindow::UIWindow(UIScreen* screenParent): UIBase(screenParent)
 {
 	// Окно
 	visible = true;
@@ -37,7 +37,9 @@ bool UIWindow::isDragAllow() const
 	if (screenParent == nullptr)
 		return false;
 
-	return (IntersectsWithMouse(title.getGlobalBounds()) || screenParent->drag == this) && GetMouseLeft();
+	bool Title = title.getGlobalBounds().contains(getMouseLocalPos());
+
+	return (Title || screenParent->drag == this) && sf::Mouse::isButtonPressed(sf::Mouse::Left);
 }
 
 void UIWindow::draw(sf::RenderTarget & target)
@@ -47,7 +49,7 @@ void UIWindow::draw(sf::RenderTarget & target)
 	// UIWINDOW
 	if (titleVisible)
 	{
-		target.draw(title, GetViewTransformOffSet());
+		target.draw(title, getViewTransformOffSet());
 	}
 }
 

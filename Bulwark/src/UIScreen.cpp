@@ -1,5 +1,11 @@
 #include "UIScreen.h"
 #include "Program.h"
+#include "UIManager.h"
+
+UIScreen::UIScreen()
+{
+	UIManager::addScreen(this);
+}
 
 void UIScreen::update()
 {
@@ -32,9 +38,9 @@ void UIScreen::updateDrag()
 		// Если все ещё разрешено
 		if ((*drag).isDragAllow())
 		{
-			sf::Vector2f NextPos = GetMouseCoords() - (*drag).getDragOffSet();
+			sf::Vector2f NextPos = getMouseLocalPos() - drag->getDragOffSet() + GetViewOffSet();
 	
-			(*drag).setPosition(sf::Vector2f(window.mapCoordsToPixel(NextPos)));
+			drag->setPosition(sf::Vector2f(window.mapPixelToCoords((sf::Vector2i)NextPos)));
 		}
 		// Если уже не разрешено
 		else
@@ -76,18 +82,24 @@ void UIScreen::draw(sf::RenderTarget &target)
 		(*c).draw(target);
 }
 
-void UIScreen::addControl(UIBase *ControlAdress)
+void UIScreen::addControl(UIBase* control)
 {
-	ControlAdress->setScreenParent(this);
-	controls.push_back(ControlAdress); // Добавляем адресс Интерфейса в список
+	control->setScreenParent(this);
+	controls.push_back(control); // Добавляем UI в список
+}
+
+void UIScreen::addControl(UIBase& control)
+{
+	control.setScreenParent(this);
+	controls.push_back(&control);
 }
 
 void UIScreen::deleteControl(unsigned int index)
 {
 	if (index > controls.size()) return;
 
-	// Удаляем из динамической памяти
-	delete controls[index];       
+	//// Удаляем из динамической памяти
+	//delete controls[index];       
 
 	// Удаляем из списка
 	std::vector <UIBase*>::iterator iter = controls.begin();
@@ -97,10 +109,10 @@ void UIScreen::deleteControl(unsigned int index)
 
 void UIScreen::deleteControls()
 {
-	for (UIBase* c : controls)
-	{
-		delete c;
-	}
+	//for (UIBase* c : controls)
+	//{
+	//	delete c;
+	//}
 	controls.clear();
 }
 
@@ -109,9 +121,7 @@ bool UIScreen::mouseIntersect()
 	bool intersect = false;
 	for (UIBase* c : controls)
 	{
-		sf::Vector2f MouseGlobalPos = window.mapPixelToCoords(sf::Mouse::getPosition(window));
-
-		if ((*c).getGlobalBounds().contains(MouseGlobalPos))
+		if ((*c).getRectShape().getGlobalBounds().contains(getMouseLocalPos()))
 		{
 			intersect = true;
 			break;

@@ -8,29 +8,29 @@ class Player
 {
 private:
 	sf::Vector2f position;      // Координаты	
-	sf::Vector2f velocity;      // Скорость
-	
-	const TileMap *map;         // Карта - только для чтения данных
+	sf::Vector2f velocity;      // Скорость	
+	const TileMap *map;         // Карта - только для чтения данных, для коллизии с объектами 
 	const sf::Texture *texture; // Текстура игрока - только для чтения данных
 
+	// flags
 	bool going;
 	bool picking;
 	bool onTile;
 
+	// properties
 	float speed;
 	int health;
 
-	enum DIR { UP, DOWN, RIGHT, LEFT, UPRIGHT, UPLEFT, DOWNRIGHT, DOWNLEFT, NONE };
-
+	enum DIR { UP = 0, DOWN, RIGHT, LEFT, UPRIGHT, UPLEFT, DOWNRIGHT, DOWNLEFT, NONE };
 	DIR playerDir; DIR targDir;
 
-	// Движение
-	sf::Vector2i targ; 
-	sf::Vector2i targT; // Координаты куда идти
+	// moving
+	sf::Vector2i targ;  // Координаты куда идти
+	sf::Vector2i targT; 
 	bool goingDirFlag; 
 	int goneX, goneY;
 
-	// Анимация
+	// animation
 	float frame;
 	sf::Sprite sprite;
 	sf::Sprite effect;

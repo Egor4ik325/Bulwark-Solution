@@ -6,11 +6,9 @@
 #include "ItemManager.h"
 #include "Content.h"
 
-#include "UIWindow.h"
 #include "Item.h"
 #include "UIInventory.h"
 #include "UIInventoryCell.h"
-#include "UIButton.h"
 
 using namespace sf;
 
@@ -30,16 +28,18 @@ Bulwark::Bulwark()
 	//view.setSize(1280, 800);                             // Маштабируем
 	//view.reset(FloatRect(offsetX, offsetY, WIDTH, HEIGHT)); // Движение
 	//Sprite Map; Map.setTexture(Content::MapTexture); Map.setTILE_SIZE(4, 4); Map.setTextureRect(IntRect(16, 0, 16, 16));
+
+	// Инициализируем переменные
 	player.setTexture(ContentManager::playerTexture);
 	player.setTileMap(map);
 
 	DebugRect::enabled = true;
 	
-	createUI();
-	
-	
-	//inventory->construct();
-	
+	addUI();
+
+	// Инициализируем Inventory
+	player.inventory.setScreenParent(gameScreen);
+	player.inventory.createCells();
 
 	// Яблоки
 	Item* item = new Item();
@@ -55,37 +55,28 @@ Bulwark::Bulwark()
 	//inventory->getCell(0)->setItem(item);
 }
 
-void Bulwark::createUI()
+void Bulwark::addUI()
 {
-	UIScreen* menu = new UIScreen(); 
-	menuScreen = menu;
-	UIButton* startButton = new UIButton(menu); //("Start", sf::Color::Black, ContentManager::font);
-	startButton->setPosition(WIDTH / 2 - 100, 350);
-	startButton->setColor(sf::Color::Green);
-	startButton->setScreenParent(menu);
-	menu->addControl(startButton);
+	//("Start", sf::Color::Black, ContentManager::font);
+	start.setScreenParent(menuScreen);
+	start.setPosition(WIDTH / 2 - 100, 350);
+	start.setColor(sf::Color::Green);
+	menuScreen.addControl(start);
+
+	quit.setScreenParent(menuScreen);// ("Quit", sf::Color::Black, ContentManager::font);
+	quit.setPosition(WIDTH / 2 - 100, 470);
+	quit.setColor(sf::Color::Green);
+	menuScreen.addControl(quit);
+
+	menuScreen.active = true;
+	///////////////////////////////////////////
+	gameScreen.addControl(player.inventory);
+
+	win.setScreenParent(gameScreen);
+	win.setPosition(100, 100);
+	gameScreen.addControl(win);
 	
-	startButtonAddress = startButton;
-
-	UIButton* quitButton = new UIButton(menu);// ("Quit", sf::Color::Black, ContentManager::font);
-	quitButton->setPosition(WIDTH / 2 - 100, 470);
-	quitButton->setColor(sf::Color::Green);
-	quitButton->setScreenParent(menu);
-	menu->addControl(quitButton);
-	quitButtonAddress = quitButton;
-
-	menu->active = true;
-	UIManager::addScreen(menu);
-
-	UIScreen* game = new UIScreen(); 
-	gameScreen = game;
-	//inventory = new UIInventory(game); // Определение inventory
-	//game->addControl(inventory);
-	game->active = false;
-	UIManager::addScreen(game);
-
-	
-	//inventory->setScreenParent(game);
+	gameScreen.active = false;
 }
 
 void Bulwark::pollEnvent()
@@ -188,7 +179,7 @@ void Bulwark::draw()
 	// Item
 	ItemManager::draw(window);
 
-	// Текст	
+	// Text	
 	drawText("X ", player.getPosition().x / TILE_SIZE, Vector2i(WIDTH - 154, 550));
 	drawText("Y ", player.getPosition().y / TILE_SIZE, Vector2i(WIDTH - 154, 580));
 	drawText("FPS ", 1 / time, Vector2i(WIDTH - 134, 0), "%.0f");
@@ -201,7 +192,7 @@ void Bulwark::drawText(const char* text, float data, const sf::Vector2i position
 
 	Text.setString(text + std::string(temp));
 	Text.setPosition((sf::Vector2f)position);
-	window.draw(Text, GetViewTransformOffSet());
+	window.draw(Text, getViewTransformOffSet());
 }
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 void Bulwark::pollEnventMenu()
@@ -218,13 +209,13 @@ void Bulwark::pollEnventMenu()
 				UIBase* over = UIManager::getMouseOver();
 				if (over != nullptr)
 				{
-					if (over == startButtonAddress)
+					if (over == &start)
 					{
 						gamePlay = true;
 						UIManager::deleteScreen(menuScreen);
-						gameScreen->active = true;
+						gameScreen.active = true;
 					}
-					if (over == quitButtonAddress)
+					if (over == &quit)
 					{
 						window.close();
 					}
@@ -244,8 +235,6 @@ void Bulwark::updateMenu()
 {
 	// Обновление данных
 	UIManager::update();
-	// Item
-	ItemManager::draw(window);
 }
 
 void Bulwark::drawMenu()

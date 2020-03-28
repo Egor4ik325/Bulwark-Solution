@@ -41,9 +41,11 @@ UIButton::UIButton(UIScreen* screenParent) : UIBase(screenParent)
 
 void UIButton::draw(sf::RenderTarget& target)
 {
-	UIBase::draw(target);
+	if (screenParent == nullptr) return;
 
-	if (rectShape.getGlobalBounds().contains(GetMouseCoords()) && GetMouseLeft())
+	UIBase::draw(target);
+	
+	if (rectShape.getGlobalBounds().contains(getMouseLocalPos()) && isMouseLeft())
 		rectShape.setFillColor(sf::Color::White); 
 	else
 		rectShape.setFillColor(color);
@@ -63,13 +65,14 @@ void UIButton::setColor(const sf::Color & color)
 
 void UIButton::drawText(sf::RenderTarget& target)
 {
-	float sizeRel = rectShape.getSize().x / 100.f; // Относительность размера текста зависит только от длины
+	// Text size depends on the UI width
+	float sizeRel = rectShape.getSize().x / 100.f; 
 	sizeRel *= (200.f / text.getString().getSize());														 
-	text.setCharacterSize(sizeRel);																	
-	sizeRel *= ((float)18.f/40.f); // Отношение Character size к реальному тексту в pix				
-																									
-	sf::Vector2f textPos;																			
-																						
+	text.setCharacterSize(sizeRel);
+	// Multiplay by a char_size/char_size_pixel
+	sizeRel *= ((float)18.f / 40.f);
+																	
+	sf::Vector2f textPos;																																								
 	float CharacterVal = text.getString().getSize();										
 	CharacterVal /= 2.f;																	
 	float rectMiddlePosX = rectShape.getPosition().x + (rectShape.getSize().x / 2.f);	
