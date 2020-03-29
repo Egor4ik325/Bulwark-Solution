@@ -6,11 +6,13 @@
 
 UIButton::UIButton(UIScreen* screenParent) : UIDragable(screenParent)
 {
-	rectShape.setFillColor(sf::Color::White);
-	rectShape.setPosition(100.f, 100.f);
-	rectShape.setSize(sf::Vector2f(200.f, 100.f));
-	rectShape.setOutlineThickness(10.f);
-	rectShape.setOutlineColor(sf::Color::Black);
+	// Name
+	name = "UIButton";
+	setFillColor(sf::Color::White);
+	setPosition(100.f, 100.f);
+	setSize(sf::Vector2f(200.f, 100.f));
+	setOutlineThickness(10.f);
+	setOutlineColor(sf::Color::Black);
 
 	text.setFillColor(sf::Color::Black);
 	text.setPosition(0, 0);
@@ -45,10 +47,10 @@ void UIButton::draw(sf::RenderTarget& target)
 
 	UIDragable::draw(target);
 	
-	if (rectShape.getGlobalBounds().contains(getMouseLocalPos()) && isMouseLeft())
-		rectShape.setFillColor(sf::Color::White); 
+	if (getGlobalBounds().contains(getMouseLocalPos()) && isMouseLeft())
+		setFillColor(sf::Color::White); 
 	else
-		rectShape.setFillColor(color);
+		setFillColor(color);
 
     drawText(target);
 }
@@ -66,7 +68,7 @@ void UIButton::setColor(const sf::Color & color)
 void UIButton::drawText(sf::RenderTarget& target)
 {
 	// Text size depends on the UI width
-	float sizeRel = rectShape.getSize().x / 100.f; 
+	float sizeRel = getSize().x / 100.f; 
 	sizeRel *= (200.f / text.getString().getSize());														 
 	text.setCharacterSize(sizeRel);
 	// Multiplay by a char_size/char_size_pixel
@@ -75,11 +77,11 @@ void UIButton::drawText(sf::RenderTarget& target)
 	sf::Vector2f textPos;																																								
 	float CharacterVal = text.getString().getSize();										
 	CharacterVal /= 2.f;																	
-	float rectMiddlePosX = rectShape.getPosition().x + (rectShape.getSize().x / 2.f);	
+	float rectMiddlePosX = getPosition().x + (getSize().x / 2.f);	
 	textPos.x = rectMiddlePosX - ((float)CharacterVal * sizeRel);									
 																									
 	sizeRel *= 3.f;																					
-	float rectMiddlePosY = rectShape.getPosition().y + (rectShape.getSize().y / 2.f);				
+	float rectMiddlePosY = getPosition().y + (getSize().y / 2.f);				
 	textPos.y = rectMiddlePosY - (0.5f * sizeRel);													
 																									
 	//DebugRect::AddRect(sf::FloatRect(rectShape.getPosition().x, rectMiddlePosY, 18,18*3),sf::Color::Red);	 

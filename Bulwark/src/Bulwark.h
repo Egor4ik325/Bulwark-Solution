@@ -2,10 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Player.h"
 #include "TileMap.h"
-#include "UIScreen.h"
-#include "UIDragable.h"
-#include "UIWindow.h"
-#include "UIButton.h"
+#include "UserInterfaces.h"
 
 class Bulwark
 {

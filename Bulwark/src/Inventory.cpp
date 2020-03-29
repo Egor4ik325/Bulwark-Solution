@@ -1,13 +1,15 @@
-#include "UIInventory.h"
+#include "Inventory.h"
 
 #include "Global.h"
 #include "UIManager.h"
 #include "Content.h"
 #include "Item.h"
-#include "UIInventoryCell.h"
+#include "InventoryCell.h"
 
-UIInventory::UIInventory(UIScreen* screenParent) : UIWindow(screenParent)
+Inventory::Inventory(UIScreen* screenParent) : UIWindow(screenParent)
 {
+	// Name
+	name = "Inventory";
 	dragAble = true;
 	titleVisible = false;
 	bodyColor = sf::Color(256, 256, 256, 100);
@@ -16,31 +18,31 @@ UIInventory::UIInventory(UIScreen* screenParent) : UIWindow(screenParent)
 	createCells();
 }
 
-void UIInventory::createCells()
+void Inventory::createCells()
 {
 	if (screenParent == nullptr) return;
 
 	cellCount = 5;
-	rectShape.setSize(sf::Vector2f(cellCount * 64 + 64, 64));
+	setSize(sf::Vector2f(cellCount * 64 + 64, 64));
 	for (int i = 0; i < cellCount; i++)
 		addCell();
 }
 
-void UIInventory::addCell()
+void Inventory::addCell()
 {
-	UIInventoryCell* cell = new UIInventoryCell(this);
-	(*cell).setPosition(cells.size() * (*cell).getRectShape().getSize().x, 0);
+	InventoryCell* cell = new InventoryCell(this);
+	(*cell).setPosition(cells.size() * (*cell).getSize().x, 0);
 	cell->setScreenParent(this->screenParent);
 	this->screenParent->addControl(cell);
 	cells.push_back(cell);
 }
 
-bool UIInventory::isDragAllow() const
+bool Inventory::isDragAllow() const
 {
 	return UIDragable::isDragAllow();
 }
 
-void UIInventory::update()
+void Inventory::update()
 {
 	if (screenParent == nullptr) return;
 	UIWindow::update();
@@ -50,13 +52,13 @@ void UIInventory::update()
 		cells[i]->update();
 
 		if (!cells[i]->isDragAllow())
-			cells[i]->setPosition(rectShape.getPosition() + sf::Vector2f(i * TILE_SIZE, 0));
+			cells[i]->setPosition(getPosition() + sf::Vector2f(i * TILE_SIZE, 0));
 	}
 }
 
-UIInventoryCell * UIInventory::getFirstEmptyCell()
+InventoryCell * Inventory::getFirstEmptyCell()
 {
-	for (UIInventoryCell* cell : cells)
+	for (InventoryCell* cell : cells)
 	{
 		if (cell->isEmpty())
 			return cell;
@@ -65,12 +67,12 @@ UIInventoryCell * UIInventory::getFirstEmptyCell()
 	return nullptr;
 }
 
-UIInventoryCell * UIInventory::getSelectedCell()
+InventoryCell * Inventory::getSelectedCell()
 {
 	return getCell(selectedCell);
 }
 
-UIInventoryCell* UIInventory::getCell(unsigned int index)
+InventoryCell* Inventory::getCell(unsigned int index)
 {
 	if (index > cells.size())
 		return nullptr;

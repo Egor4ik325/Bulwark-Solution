@@ -4,7 +4,7 @@
 #include "UIManager.h"
 #include "ItemManager.h"
 #include "Global.h"
-#include "UIInventoryCell.h"
+#include "InventoryCell.h"
 
 Player::Player()
 {
@@ -643,14 +643,14 @@ void Player::pickUp()
 	if (item->onGround == false)
 		return;
 
-	UIInventoryCell* cell = inventory.getFirstEmptyCell();
+	InventoryCell* cell = inventory.getFirstEmptyCell();
 	if (cell == nullptr)
 		return;
 	
 	cell->setItem(item);
 }
 
-void Player::dropUp(UIInventoryCell * cell)
+void Player::dropUp(InventoryCell * cell)
 {
 	Item* item = cell->getItem();
 	if (item == nullptr) return;

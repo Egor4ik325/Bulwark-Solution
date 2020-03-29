@@ -5,17 +5,19 @@
 
 UIWindow::UIWindow(UIScreen* screenParent): UIDragable(screenParent)
 {
-	// Окно
+	// Name
+	name = "UIWindow";
+	// Window
 	visible = true;
 	dragAble = true;
-	rectShape.setSize(sf::Vector2f(300, 200));
-	// Цвета
+	setSize(sf::Vector2f(300, 200));
+	// Colors
 	bodyColor = sf::Color(130, 130, 130, 180);
 	titleColor = sf::Color(90, 90, 90, 200);
 	titleSelectedColor = sf::Color(120, 120, 120, 200);
-	// Заголовок
+	// Title
 	titleVisible = true;
-	title.setSize(sf::Vector2f(rectShape.getSize().x, TITLE_HEIGHT));
+	title.setSize(sf::Vector2f(getSize().x, TITLE_HEIGHT));
 }
 
 void UIWindow::update()
@@ -23,13 +25,8 @@ void UIWindow::update()
 	UIDragable::update();
 
 	// UIWINDOW
-	title.setPosition(rectShape.getPosition());
+	title.setPosition(getPosition());
 	applyColors();
-}
-
-void UIWindow::updateOver()
-{	
-	UIDragable::updateOver();
 }
 
 bool UIWindow::isDragAllow() const
@@ -55,7 +52,7 @@ void UIWindow::draw(sf::RenderTarget & target)
 
 void UIWindow::applyColors()
 {
-	rectShape.setFillColor(bodyColor);
+	setFillColor(bodyColor);
 	title.setFillColor(titleColor);
 
 	if (screenParent->over == this)

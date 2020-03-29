@@ -10,23 +10,13 @@ UIScreen::UIScreen()
 void UIScreen::update()
 {
 	// Сначала изменяем
-	updateDrag(); 
-	updateOver();
+	updateDrag();
 
-
-	for (UIDragable* c : controls)
+	over = nullptr;
+	//updateOver();
+	for (UIBase* c : controls)
 	{
 		(*c).update();
-	}
-}
-
-void UIScreen::updateOver()
-{
-	over = nullptr;
-
-	for (UIDragable* c : controls)
-	{
-		(*c).updateOver();
 	}
 }
 
@@ -79,7 +69,7 @@ void UIScreen::updateDrag()
 
 void UIScreen::draw(sf::RenderTarget &target)
 {
-	for (UIDragable *c : controls)
+	for (UIBase *c : controls)
 		(*c).draw(target);
 }
 
@@ -103,7 +93,7 @@ void UIScreen::deleteControl(unsigned int index)
 	//delete controls[index];       
 
 	// Удаляем из списка
-	std::vector <UIDragable*>::iterator iter = controls.begin();
+	std::vector <UIBase*>::iterator iter = controls.begin();
 	std::advance(iter, index);
 	controls.erase(iter);        
 }
@@ -120,9 +110,9 @@ void UIScreen::deleteControls()
 bool UIScreen::mouseIntersect()
 {
 	bool intersect = false;
-	for (UIDragable* c : controls)
+	for (UIBase* c : controls)
 	{
-		if ((*c).getRectShape().getGlobalBounds().contains(getMouseLocalPos()))
+		if ((*c).getGlobalBounds().contains(getMouseLocalPos()))
 		{
 			intersect = true;
 			break;

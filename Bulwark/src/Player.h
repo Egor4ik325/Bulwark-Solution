@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "UIInventory.h"
+#include "Inventory.h"
 
 class TileMap;
 
@@ -36,7 +36,7 @@ private:
 	sf::Sprite effect;
 
 public:
-	UIInventory inventory;      // Инвентарь, для каждого игрока - отдельный
+	Inventory inventory;      // Инвентарь, для каждого игрока - отдельный
 public:
 	Player();
 	// Передача по ссылке, тк необходимо устранить ошибки
@@ -46,7 +46,7 @@ public:
 	void draw(sf::RenderTarget & target);
 	
 	void pickUp();
-	void dropUp(UIInventoryCell* cell);
+	void dropUp(InventoryCell* cell);
 	void stop();
 	
 	void moveBy(int TileX, int TileY);

@@ -108,12 +108,6 @@
     <ClCompile Include="src\UIManager.cpp">
       <Filter>resourse\UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\UIInventoryCell.cpp">
-      <Filter>resourse\Inventory</Filter>
-    </ClCompile>
-    <ClCompile Include="src\UIInventory.cpp">
-      <Filter>resourse\Inventory</Filter>
-    </ClCompile>
     <ClCompile Include="src\UIButton.cpp">
       <Filter>resourse\UI</Filter>
     </ClCompile>
@@ -135,11 +129,14 @@
     <ClCompile Include="src\UIDragable.cpp">
       <Filter>resourse\UI</Filter>
     </ClCompile>
-    <ClCompile Include="src\UI.cpp">
-      <Filter>resourse\UI</Filter>
-    </ClCompile>
     <ClCompile Include="src\UIBase.cpp">
       <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Inventory.cpp">
+      <Filter>resourse\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\InventoryCell.cpp">
+      <Filter>resourse\Inventory</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,12 +200,6 @@
     <ClInclude Include="src\UIManager.h">
       <Filter>resourse\UI</Filter>
     </ClInclude>
-    <ClInclude Include="src\UIInventoryCell.h">
-      <Filter>resourse\Inventory</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UIInventory.h">
-      <Filter>resourse\Inventory</Filter>
-    </ClInclude>
     <ClInclude Include="src\UIButton.h">
       <Filter>resourse\UI</Filter>
     </ClInclude>
@@ -224,12 +215,15 @@
     <ClInclude Include="src\UIDragable.h">
       <Filter>resourse\UI</Filter>
     </ClInclude>
-    <ClInclude Include="src\UserInterface.h">
-      <Filter>resourse\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="src\UI.h">
-      <Filter>resourse\UI</Filter>
-    </ClInclude>
     <ClInclude Include="src\UIBase.h" />
+    <ClInclude Include="src\Inventory.h">
+      <Filter>resourse\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\InventoryCell.h">
+      <Filter>resourse\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UserInterfaces.h">
+      <Filter>resourse\UI</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

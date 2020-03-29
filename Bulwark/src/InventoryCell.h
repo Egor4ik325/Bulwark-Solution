@@ -3,19 +3,19 @@
 #include "UIDragable.h"
 
 
-class UIInventory;
+class Inventory;
 class Item;
 
-class UIInventoryCell : public UIDragable
+class InventoryCell : public UIDragable
 {
 public:
 	Item* itemContain;
 
-	UIInventory* invParent;
+	Inventory* invParent;
 	
 	sf::Color selectedColor;
 public:
-	UIInventoryCell(UIInventory* inventoryParent);
+	InventoryCell(Inventory* inventoryParent);
 
 	void update() override;
 	void draw(sf::RenderTarget& target) override;

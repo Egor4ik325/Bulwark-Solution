@@ -12,14 +12,14 @@ class UIManager
 private:
 	static std::vector<UIScreen*> screens;     // Храним все возможные экраны UI
 						
-	static UIDragable* overAll, *dragAll;            // В итоге - что передвигаем и над чем курсор
+	static UIBase* overAll, *dragAll;            // В итоге - что передвигаем и над чем курсор
 public:											 
 
 	static void update();						 // Обновляем активные UI экраны
     static void draw(sf::RenderTarget &target);  // Рисуем активные UI экраны
 
-	static UIDragable* getMouseOver();
-	static UIDragable* getMouseDrag();
+	static UIBase* getMouseOver();
+	static UIBase* getMouseDrag();
 
 	// Передаем адрес Screen созданного в динамической памяти
 	static void addScreen(UIScreen* screen);

@@ -1,16 +1,9 @@
 #include "Bulwark.h"
 
+#include "Content.h"
 #include "Global.h"
 #include "DebugRect.h"
-#include "UIManager.h"
 #include "ItemManager.h"
-#include "Content.h"
-
-#include "Item.h"
-#include "UIInventory.h"
-#include "UIInventoryCell.h"
-#include "UI.h"
-#include "UIBase.h"
 
 using namespace sf;
 
@@ -69,7 +62,7 @@ void Bulwark::addUI()
 	quit.setColor(sf::Color::Green);
 	menuScreen.addControl(quit);
 
-	menuScreen.active = true;
+	menuScreen.visible = true;
 	///////////////////////////////////////////
 	gameScreen.addControl(player.inventory);
 
@@ -77,7 +70,7 @@ void Bulwark::addUI()
 	win.setPosition(100, 100);
 	gameScreen.addControl(win);
 	
-	gameScreen.active = false;
+	gameScreen.visible = false;
 }
 
 void Bulwark::pollEnvent()
@@ -139,7 +132,7 @@ void Bulwark::pollEnvent()
 		
 		if (Keyboard::isKeyPressed(Keyboard::Key::Q))
 		{
-			UIInventoryCell* cell = player.inventory.getSelectedCell();
+			InventoryCell* cell = player.inventory.getSelectedCell();
 			player.dropUp(cell);
 		}
 	}
@@ -208,14 +201,14 @@ void Bulwark::pollEnventMenu()
 		{
 			if (event.key.code == Mouse::Left)
 			{
-				UIDragable* over = UIManager::getMouseOver();
+				UIBase* over = UIManager::getMouseOver();
 				if (over != nullptr)
 				{
 					if (over == &start)
 					{
 						gamePlay = true;
 						UIManager::deleteScreen(menuScreen);
-						gameScreen.active = true;
+						gameScreen.visible = true;
 					}
 					if (over == &quit)
 					{

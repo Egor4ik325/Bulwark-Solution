@@ -1,17 +1,31 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "UI.h"
+#include <string>
+
+class UIScreen;
 
 ////////////////////////////////////////////////////////////
-/// \brief Base class for UI with implementation
+/// \brief Abstract base class for UI includes {UIDrawable, UITransformable}
 ///
 ////////////////////////////////////////////////////////////
-class UIBase : public UI
+class UIBase : public sf::RectangleShape
 {
 protected:
-	UIBase(UIScreen* screenParent);
+	//UIBase() = default; // Default protected contructor means - abstract class - can not be created
+	std::string name;
+	bool visible;
+
+	UIBase(UIScreen* screenParent); 
 
 public:
-	// Унаследовано через UI
-	virtual void draw(sf::RenderTarget & target) override;
+	UIScreen* screenParent; // Родитель
+
+public:
+
+	virtual void draw(sf::RenderTarget& target);
+	virtual void update() = 0;
+
+	void setScreenParent(UIScreen* screenParent);
+	void setScreenParent(UIScreen& screenParent);
+	const std::string& getUIName() const;
 };

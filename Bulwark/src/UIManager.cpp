@@ -5,21 +5,20 @@
 
 std::vector <UIScreen*> UIManager::screens;
 
-UIDragable* UIManager::overAll = nullptr;
-UIDragable* UIManager::dragAll = nullptr;
+UIBase* UIManager::overAll = nullptr;
+UIBase* UIManager::dragAll = nullptr;
 
 void UIManager::update()
 {
-	updateDrag();
+	//updateDrag();
 	for (UIScreen* uiscr : screens)
 	{
-		if ((*uiscr).active)
+		if ((*uiscr).visible)
 		{
 			(*uiscr).update();
 			// Выводим одни общие указатели на *Drag и *Over
 			dragAll = uiscr->drag;
 			overAll = uiscr->over;
-			
 		}
 	}	
 }
@@ -31,16 +30,16 @@ void UIManager::updateDrag()
 void UIManager::draw(sf::RenderTarget & target)
 {
 	for (UIScreen* uiscr : screens)
-		if ((*uiscr).active)
+		if ((*uiscr).visible)
 			(*uiscr).draw(target);
 }
 
-UIDragable* UIManager::getMouseOver()
+UIBase* UIManager::getMouseOver()
 {
-	UIDragable* over = nullptr;
+	UIBase* over = nullptr;
 	for (UIScreen* screen : screens)
 	{
-		if (screen->active)
+		if (screen->visible)
 		{
 			if (screen->over != nullptr)
 			{
@@ -51,12 +50,12 @@ UIDragable* UIManager::getMouseOver()
 	return over;
 }
 
-UIDragable* UIManager::getMouseDrag()
+UIBase* UIManager::getMouseDrag()
 {
-	UIDragable* drag = nullptr;
+	UIBase* drag = nullptr;
 	for (UIScreen* screen : screens)
 	{
-		if (screen->active)
+		if (screen->visible)
 		{
 			if (screen->drag != nullptr)
 			{
