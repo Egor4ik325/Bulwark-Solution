@@ -4,7 +4,7 @@
 #include "DebugRect.h"
 #include <iostream>
 
-UIButton::UIButton(UIScreen* screenParent) : UIBase(screenParent)
+UIButton::UIButton(UIScreen* screenParent) : UIDragable(screenParent)
 {
 	rectShape.setFillColor(sf::Color::White);
 	rectShape.setPosition(100.f, 100.f);
@@ -43,7 +43,7 @@ void UIButton::draw(sf::RenderTarget& target)
 {
 	if (screenParent == nullptr) return;
 
-	UIBase::draw(target);
+	UIDragable::draw(target);
 	
 	if (rectShape.getGlobalBounds().contains(getMouseLocalPos()) && isMouseLeft())
 		rectShape.setFillColor(sf::Color::White); 
@@ -55,7 +55,7 @@ void UIButton::draw(sf::RenderTarget& target)
 
 void UIButton::updateOver()
 {
-	UIBase::updateOver();
+	UIDragable::updateOver();
 }
 
 void UIButton::setColor(const sf::Color & color)

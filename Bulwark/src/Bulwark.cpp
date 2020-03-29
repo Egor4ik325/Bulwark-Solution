@@ -9,6 +9,8 @@
 #include "Item.h"
 #include "UIInventory.h"
 #include "UIInventoryCell.h"
+#include "UI.h"
+#include "UIBase.h"
 
 using namespace sf;
 
@@ -206,7 +208,7 @@ void Bulwark::pollEnventMenu()
 		{
 			if (event.key.code == Mouse::Left)
 			{
-				UIBase* over = UIManager::getMouseOver();
+				UIDragable* over = UIManager::getMouseOver();
 				if (over != nullptr)
 				{
 					if (over == &start)

@@ -37,7 +37,7 @@ void UIInventory::addCell()
 
 bool UIInventory::isDragAllow() const
 {
-	return UIBase::isDragAllow();
+	return UIDragable::isDragAllow();
 }
 
 void UIInventory::update()

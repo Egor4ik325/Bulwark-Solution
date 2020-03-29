@@ -1,8 +1,8 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "UIBase.h"
+#include "UIDragable.h"
 
-class UIWindow : public  UIBase
+class UIWindow : public  UIDragable
 {
 protected:
 	sf::RectangleShape title;

@@ -4,7 +4,7 @@
 #include "Content.h"
 #include "UIInventory.h"
 
-UIInventoryCell::UIInventoryCell(UIInventory* inv) : UIBase(inv->screenParent)
+UIInventoryCell::UIInventoryCell(UIInventory* inv) : UIDragable(inv->screenParent)
 {
 	// Запоминаем родителя
 	this->invParent = inv;
@@ -23,7 +23,7 @@ UIInventoryCell::UIInventoryCell(UIInventory* inv) : UIBase(inv->screenParent)
 
 void UIInventoryCell::update()
 {
-	UIBase::update();
+	UIDragable::update();
 
 	if (itemContain != nullptr)
 	{
@@ -39,7 +39,7 @@ void UIInventoryCell::draw(sf::RenderTarget & target)
 	else
 		rectShape.setFillColor(sf::Color::White);
 
-	UIBase::draw(target);
+	UIDragable::draw(target);
 }
 
 void UIInventoryCell::setItem(Item * item)

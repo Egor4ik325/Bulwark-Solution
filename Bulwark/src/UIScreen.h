@@ -1,15 +1,15 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "UIBase.h"
+#include "UIDragable.h"
 
-// Ёкран - массим интерфейсов
+// Ёкран - массив интерфейсов
 class UIScreen
 {
 public:
-	std::vector <UIBase*> controls; // јдреса UI из динам. пам€ти
+	std::vector <UIDragable*> controls; // јдреса UI из динам. пам€ти
 
 	bool active = false;
-	UIBase* over, *drag;
+	UIDragable* over, *drag;
 
 public:
 
@@ -19,8 +19,8 @@ public:
 	void draw(sf::RenderTarget &target);
 
 	// ѕередаем UI дл€ добавлени€ в Managment
-	void addControl(UIBase* control);
-	void addControl(UIBase& control);
+	void addControl(UIDragable* control);
+	void addControl(UIDragable& control);
 
 	void deleteControl(unsigned int index);
 	void deleteControls();

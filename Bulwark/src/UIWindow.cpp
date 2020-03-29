@@ -3,7 +3,7 @@
 #include "UIManager.h"
 #include "Global.h"
 
-UIWindow::UIWindow(UIScreen* screenParent): UIBase(screenParent)
+UIWindow::UIWindow(UIScreen* screenParent): UIDragable(screenParent)
 {
 	// Окно
 	visible = true;
@@ -20,7 +20,7 @@ UIWindow::UIWindow(UIScreen* screenParent): UIBase(screenParent)
 
 void UIWindow::update()
 {	
-	UIBase::update();
+	UIDragable::update();
 
 	// UIWINDOW
 	title.setPosition(rectShape.getPosition());
@@ -29,7 +29,7 @@ void UIWindow::update()
 
 void UIWindow::updateOver()
 {	
-	UIBase::updateOver();
+	UIDragable::updateOver();
 }
 
 bool UIWindow::isDragAllow() const
@@ -44,7 +44,7 @@ bool UIWindow::isDragAllow() const
 
 void UIWindow::draw(sf::RenderTarget & target)
 {	
-	UIBase::draw(target);
+	UIDragable::draw(target);
 
 	// UIWINDOW
 	if (titleVisible)

@@ -1,8 +1,8 @@
 #pragma once
 #include "SFML/Graphics.hpp"
-#include "UIBase.h"
+#include "UIDragable.h"
 
-class UIButton : public UIBase
+class UIButton : public UIDragable
 {
 protected:
 	sf::Text text;

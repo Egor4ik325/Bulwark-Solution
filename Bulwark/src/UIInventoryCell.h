@@ -1,12 +1,12 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "UIBase.h"
+#include "UIDragable.h"
 
 
 class UIInventory;
 class Item;
 
-class UIInventoryCell : public UIBase
+class UIInventoryCell : public UIDragable
 {
 public:
 	Item* itemContain;

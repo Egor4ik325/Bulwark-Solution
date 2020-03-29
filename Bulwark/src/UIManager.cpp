@@ -1,12 +1,12 @@
 #include "UIManager.h"
-#include "UIBase.h"
+#include "UIDragable.h"
 #include <iostream>
 #include <iterator>
 
 std::vector <UIScreen*> UIManager::screens;
 
-UIBase* UIManager::overAll = nullptr;
-UIBase* UIManager::dragAll = nullptr;
+UIDragable* UIManager::overAll = nullptr;
+UIDragable* UIManager::dragAll = nullptr;
 
 void UIManager::update()
 {
@@ -35,9 +35,9 @@ void UIManager::draw(sf::RenderTarget & target)
 			(*uiscr).draw(target);
 }
 
-UIBase* UIManager::getMouseOver()
+UIDragable* UIManager::getMouseOver()
 {
-	UIBase* over = nullptr;
+	UIDragable* over = nullptr;
 	for (UIScreen* screen : screens)
 	{
 		if (screen->active)
@@ -51,9 +51,9 @@ UIBase* UIManager::getMouseOver()
 	return over;
 }
 
-UIBase* UIManager::getMouseDrag()
+UIDragable* UIManager::getMouseDrag()
 {
-	UIBase* drag = nullptr;
+	UIDragable* drag = nullptr;
 	for (UIScreen* screen : screens)
 	{
 		if (screen->active)

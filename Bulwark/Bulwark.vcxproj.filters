@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="resourse">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="resourse\TileMap">
+      <UniqueIdentifier>{8f8c1982-6ed7-4e9a-88d4-34299660bc59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resourse\TileMap\TinyXML">
+      <UniqueIdentifier>{d15a4add-0fca-4c74-8cac-d2ab22a0a679}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resourse\src">
+      <UniqueIdentifier>{95e35495-3fb0-49a0-98f0-b776c814eb2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resourse\Entity">
+      <UniqueIdentifier>{ca1f0f65-77e7-4f48-b5ab-0a07a97f93b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resourse\Entity\Item">
+      <UniqueIdentifier>{602d26c0-2cc7-49a9-8c8f-66119955149d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resourse\Entity\Nps">
+      <UniqueIdentifier>{081b319b-4c6e-4a06-8a8b-9aae7c425a76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resourse\Inventory">
+      <UniqueIdentifier>{7372e97b-0a39-44f9-b2e4-8827004c3108}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resourse\Player">
+      <UniqueIdentifier>{813ff923-d773-43c3-b0f5-21e55afa98d2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resourse\Content">
+      <UniqueIdentifier>{11d3e0c0-586d-4943-8935-aa49b0f1488d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="main">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="main\Program">
+      <UniqueIdentifier>{e707b6af-b18f-46cd-a60a-eb4ae20836ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resourse\Entity\Effect System">
+      <UniqueIdentifier>{b180e39f-5314-4d6d-9063-18f9148772b7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="resourse\UI">
+      <UniqueIdentifier>{d167b527-deb9-4cd4-9265-5f2d1611b77d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\Animation.cpp">
+      <Filter>resourse\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\DebugRect.cpp">
+      <Filter>resourse\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Item.cpp">
+      <Filter>resourse\Entity\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemArmorr.cpp">
+      <Filter>resourse\Entity\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemFood.cpp">
+      <Filter>resourse\Entity\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemSpell.cpp">
+      <Filter>resourse\Entity\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemWeapon.cpp">
+      <Filter>resourse\Entity\Item</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Npc.cpp">
+      <Filter>resourse\Entity\Nps</Filter>
+    </ClCompile>
+    <ClCompile Include="src\NpcBoss.cpp">
+      <Filter>resourse\Entity\Nps</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Player.cpp">
+      <Filter>resourse\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="src\World.cpp">
+      <Filter>resourse\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SpriteSheet.cpp">
+      <Filter>resourse\src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Content.cpp">
+      <Filter>resourse\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Effect.cpp">
+      <Filter>resourse\Entity\Effect System</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Main.cpp" />
+    <ClCompile Include="src\Bulwark.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+    <ClCompile Include="src\ItemManager.cpp">
+      <Filter>resourse\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Global.cpp">
+      <Filter>main\Program</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIWindow.cpp">
+      <Filter>resourse\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIScreen.cpp">
+      <Filter>resourse\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIManager.cpp">
+      <Filter>resourse\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIInventoryCell.cpp">
+      <Filter>resourse\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIInventory.cpp">
+      <Filter>resourse\Inventory</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIButton.cpp">
+      <Filter>resourse\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tinyxmlparser.cpp">
+      <Filter>resourse\TileMap\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tinyxmlerror.cpp">
+      <Filter>resourse\TileMap\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tinyxml.cpp">
+      <Filter>resourse\TileMap\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="src\tinystr.cpp">
+      <Filter>resourse\TileMap\TinyXML</Filter>
+    </ClCompile>
+    <ClCompile Include="src\TileMap.cpp">
+      <Filter>resourse\TileMap</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIDragable.cpp">
+      <Filter>resourse\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UI.cpp">
+      <Filter>resourse\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="src\UIBase.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\Animation.h">
+      <Filter>resourse\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\DebugRect.h">
+      <Filter>resourse\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Item.h">
+      <Filter>resourse\Entity\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemArmorr.h">
+      <Filter>resourse\Entity\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemFood.h">
+      <Filter>resourse\Entity\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemSpell.h">
+      <Filter>resourse\Entity\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemWeapon.h">
+      <Filter>resourse\Entity\Item</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Npc.h">
+      <Filter>resourse\Entity\Nps</Filter>
+    </ClInclude>
+    <ClInclude Include="src\NpcBoss.h">
+      <Filter>resourse\Entity\Nps</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Player.h">
+      <Filter>resourse\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="src\World.h">
+      <Filter>resourse\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SpriteSheet.h">
+      <Filter>resourse\src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Content.h">
+      <Filter>resourse\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Effect.h">
+      <Filter>resourse\Entity\Effect System</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Bulwark.h">
+      <Filter>main</Filter>
+    </ClInclude>
+    <ClInclude Include="src\ItemManager.h">
+      <Filter>resourse\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="src\Global.h">
+      <Filter>main\Program</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIWindow.h">
+      <Filter>resourse\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIScreen.h">
+      <Filter>resourse\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIManager.h">
+      <Filter>resourse\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIInventoryCell.h">
+      <Filter>resourse\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIInventory.h">
+      <Filter>resourse\Inventory</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIButton.h">
+      <Filter>resourse\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tinyxml.h">
+      <Filter>resourse\TileMap\TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="src\tinystr.h">
+      <Filter>resourse\TileMap\TinyXML</Filter>
+    </ClInclude>
+    <ClInclude Include="src\TileMap.h">
+      <Filter>resourse\TileMap</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIDragable.h">
+      <Filter>resourse\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UserInterface.h">
+      <Filter>resourse\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UI.h">
+      <Filter>resourse\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="src\UIBase.h" />
+  </ItemGroup>
+</Project>
