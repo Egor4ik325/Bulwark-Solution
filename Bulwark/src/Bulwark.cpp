@@ -9,31 +9,27 @@ using namespace sf;
 
 Bulwark::Bulwark()
 {
-	// Меню
+	// Menu
 	gamePlay = false;
-	// Карта
+	// TileMap
 	map.loadFromFile(ContentManager::CONTENT_DIR + "Map.tmx");   // Карта 30x30
 	map.setTileSize(TILE_SIZE);
 	map.setTileType(3, TileMap::WALL); map.setTileType(5, TileMap::WALL); map.setTileType(10, TileMap::WALL);
 
-	// Параметры вида
+	// View
 	view.reset(FloatRect(0.0f, 0.0f, WIDTH, HEIGHT));
 	//view.setViewport(FloatRect(0.0f, 0.0f, 0.5f, 0.5f)); // Двигаем окно
 	//view.setSize(1280, 800);                             // Маштабируем
 	//view.reset(FloatRect(offsetX, offsetY, WIDTH, HEIGHT)); // Движение
 	//Sprite Map; Map.setTexture(Content::MapTexture); Map.setTILE_SIZE(4, 4); Map.setTextureRect(IntRect(16, 0, 16, 16));
 
-	// Инициализируем переменные
+	// Init player
 	player.setTexture(ContentManager::playerTexture);
 	player.setTileMap(map);
 
 	DebugRect::enabled = true;
 	
 	addUI();
-
-	// Инициализируем Inventory
-	player.inventory.setScreenParent(gameScreen);
-	//player.inventory.;
 
 	// Яблоки
 	Item* item = new Item();
@@ -45,32 +41,38 @@ Bulwark::Bulwark()
 	item2->setTilePosition(sf::Vector2f(10, 12));
 	ItemManager::addItem(item2);
 
-	// Добавляем яблоко в инвентарь
-	//inventory->getCell(0)->setItem(item);
+	// Init Inventory
+	player.inventory.setScreenParent(gameScreen);
+	player.inventory.createCells();
+	// Add item to inventory
+	player.inventory.getFirstEmptyCell()->setItem(item);
 }
 
 void Bulwark::addUI()
 {
-	//("Start", sf::Color::Black, ContentManager::font);
-	start.setScreenParent(menuScreen);
+	start.setScreenParent(menuScreen); //("Start", sf::Color::Black, ContentManager::font);
 	start.setPosition(WIDTH / 2 - 100, 350);
 	start.setColor(sf::Color::Green);
-	menuScreen.addControl(start);
 
 	quit.setScreenParent(menuScreen);// ("Quit", sf::Color::Black, ContentManager::font);
 	quit.setPosition(WIDTH / 2 - 100, 470);
 	quit.setColor(sf::Color::Green);
+
+	menuScreen.addControl(start);
 	menuScreen.addControl(quit);
 
 	menuScreen.visible = true;
 	///////////////////////////////////////////
-	gameScreen.addControl(player.inventory);
-
 	win.setScreenParent(gameScreen);
 	win.setPosition(100, 100);
+
+	gameScreen.addControl(player.inventory);
 	gameScreen.addControl(win);
 	
 	gameScreen.visible = false;
+
+	/////////////////////////////////////////
+
 }
 
 void Bulwark::pollEnvent()

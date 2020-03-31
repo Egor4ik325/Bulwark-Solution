@@ -10,12 +10,10 @@ InventoryCell::InventoryCell(Inventory* inv) : UIDragable(inv->screenParent)
 	name = "InventoryCell";
 	// Запоминаем родителя
 	this->invParent = inv;
+	screenParent = invParent->screenParent;
 	// Хранимый предмет
 	itemContain = nullptr;
 	dragAble = true;
-	
-	screenParent = invParent->screenParent;
-	//
 	selectedColor = sf::Color::Black;
 	// Устанавливаем текстуру
 	setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
@@ -25,18 +23,18 @@ InventoryCell::InventoryCell(Inventory* inv) : UIDragable(inv->screenParent)
 
 void InventoryCell::update()
 {
-	UIDragable::update();
-
 	if (itemContain != nullptr)
 	{
 		// Двигаем Item внутри
 		itemContain->setPosition(getPosition());
 	}
+	UIDragable::update();
+
 }
 
 void InventoryCell::draw(sf::RenderTarget & target)
 {
-	if (invParent->getCell(invParent->selectedCell) == this)
+	if (invParent->getSelectedCell() == this)
 		setFillColor(selectedColor);
 	else
 		setFillColor(sf::Color::White);

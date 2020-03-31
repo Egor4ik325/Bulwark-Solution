@@ -55,11 +55,6 @@ void UIButton::draw(sf::RenderTarget& target)
     drawText(target);
 }
 
-void UIButton::updateOver()
-{
-	UIDragable::updateOver();
-}
-
 void UIButton::setColor(const sf::Color & color)
 {
 	this->color = color;

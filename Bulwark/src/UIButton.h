@@ -14,7 +14,6 @@ public:
 	//UIButton(const std::string& text, const sf::Color& color, const sf::Font& font);
 
 	void draw(sf::RenderTarget & target) override;
-	void updateOver() override;
 
 	void setColor(const sf::Color& color);
 protected:

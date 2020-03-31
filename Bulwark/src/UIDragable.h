@@ -20,12 +20,10 @@ public:
 	// Унаследовано через UIBase
 	virtual void update() override;
 
-	virtual void updateOver();  	  //
-	virtual void onDragBegin();	      //
-	virtual void onDrop();		      //   Dragable fuctions
-	virtual void onCancelDrag();      //
-	virtual bool isDragAllow() const; // 
-
+	virtual void onDragBegin();	      
+	virtual void onDrop();		      
+	virtual void onCancelDrag();      
+	virtual bool isDragAllow() const; 
 	inline sf::Vector2f getDragOffSet() { return dragOffset; };
 };
 

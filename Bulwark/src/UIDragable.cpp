@@ -15,23 +15,18 @@ UIDragable::UIDragable(UIScreen* screenParent) : UIBase(screenParent)
 	dragOffset = sf::Vector2f(0.f, 0.f);
 }
 
+// Обновляем информацию объекта под курсором
 void UIDragable::update()
 {
-	if (screenParent == nullptr) return;
+	UIBase::update();
 
-	updateOver();
-}
-
-// Обновляем информацию объекта под курсором
-void UIDragable::updateOver()
-{
 	if (screenParent == nullptr) return;
 
 	// Если курсор пересекся с Интерфейсом
 	if (getGlobalBounds().contains(getMouseLocalPos()))
 	{
 
-		std::cout << "Intersect!! \n";
+		std::cout << "Intersects with " << getName() << std::endl;
 
 		if (dragAble && isDragAllow())
 		{
@@ -48,7 +43,7 @@ void UIDragable::updateOver()
 				onDragBegin();
 
 
-				std::cout << "START MOVING!! \n";
+				std::cout << "START MOVING!! " << this->getName() << std::endl;
 			}
 		}
 
@@ -56,6 +51,8 @@ void UIDragable::updateOver()
 		if (screenParent->drag != this)
 			screenParent->over = this;
 	}
+
+	updateChildren();
 }
 
 void UIDragable::onDragBegin()

@@ -31,14 +31,24 @@ void Inventory::createCells()
 void Inventory::addCell()
 {
 	InventoryCell* cell = new InventoryCell(this);
-	(*cell).setPosition(cells.size() * (*cell).getSize().x, 0);
-	cell->setScreenParent(this->screenParent);
-	this->screenParent->addControl(cell);
+	cell->setPosition(cells.size() * (*cell).getSize().x, 0);
+
 	cells.push_back(cell);
+	childs.push_back(cell);
 }
 
 bool Inventory::isDragAllow() const
 {
+	bool cellDrag = false;
+	for (auto c : cells)
+	{
+		if (c->isDragAllow())
+			cellDrag = true;
+	}
+
+	if (cellDrag && screenParent->drag != this)
+		return false;
+
 	return UIDragable::isDragAllow();
 }
 
@@ -49,11 +59,13 @@ void Inventory::update()
 
 	for (int i = 0; i < cellCount; i++)
 	{
-		cells[i]->update();
-
 		if (!cells[i]->isDragAllow())
+		{
 			cells[i]->setPosition(getPosition() + sf::Vector2f(i * TILE_SIZE, 0));
+		}
 	}
+
+	updateChildren();
 }
 
 InventoryCell * Inventory::getFirstEmptyCell()

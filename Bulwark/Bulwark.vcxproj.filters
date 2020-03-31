@@ -138,6 +138,9 @@
     <ClCompile Include="src\InventoryCell.cpp">
       <Filter>resourse\Inventory</Filter>
     </ClCompile>
+    <ClCompile Include="src\UIItem.cpp">
+      <Filter>main</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Animation.h">
@@ -225,5 +228,6 @@
     <ClInclude Include="src\UserInterfaces.h">
       <Filter>resourse\UI</Filter>
     </ClInclude>
+    <ClInclude Include="src\UIItem.h" />
   </ItemGroup>
 </Project>

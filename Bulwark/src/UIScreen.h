@@ -6,11 +6,10 @@
 class UIScreen
 {
 public:
-	std::vector <UIBase*> controls; // Адреса UI из статик. памяти Stack/Heap
-
-	UIDragable* over, *drag;
 	bool visible = false;
 
+	std::vector <UIBase*> controls; // Адреса UI из статик. памяти Stack/Heap
+	UIDragable* over, *drag;
 public:
 
 	UIScreen();
@@ -25,6 +24,7 @@ public:
 	void deleteControls();
 	bool mouseIntersect();
 
+	~UIScreen();
 private:
 	void updateDrag();
 };

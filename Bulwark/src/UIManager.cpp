@@ -11,15 +11,16 @@ UIBase* UIManager::dragAll = nullptr;
 void UIManager::update()
 {
 	//updateDrag();
-	for (UIScreen* uiscr : screens)
+
+	for (UIScreen* screen : screens)
 	{
-		if ((*uiscr).visible)
-		{
-			(*uiscr).update();
-			// Выводим одни общие указатели на *Drag и *Over
-			dragAll = uiscr->drag;
-			overAll = uiscr->over;
-		}
+		if (!screen->visible) continue;
+	
+		screen->update();
+		// Выводим одни общие указатели на *Drag и *Over
+		dragAll = screen->drag;
+		overAll = screen->over;
+
 	}	
 }
 
@@ -29,9 +30,12 @@ void UIManager::updateDrag()
 
 void UIManager::draw(sf::RenderTarget & target)
 {
-	for (UIScreen* uiscr : screens)
-		if ((*uiscr).visible)
-			(*uiscr).draw(target);
+	for (UIScreen* screen : screens)
+	{
+		if (!screen->visible) continue;
+
+		screen->draw(target);
+	}
 }
 
 UIBase* UIManager::getMouseOver()
@@ -39,13 +43,13 @@ UIBase* UIManager::getMouseOver()
 	UIBase* over = nullptr;
 	for (UIScreen* screen : screens)
 	{
-		if (screen->visible)
+		if (!screen->visible) continue;
+		
+		if (screen->over != nullptr)
 		{
-			if (screen->over != nullptr)
-			{
 				over = screen->over;
-			}
 		}
+		
 	}
 	return over;
 }

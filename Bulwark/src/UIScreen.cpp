@@ -16,7 +16,7 @@ void UIScreen::update()
 	//updateOver();
 	for (UIBase* c : controls)
 	{
-		(*c).update();
+		c->update();
 	}
 }
 
@@ -45,32 +45,15 @@ void UIScreen::updateDrag()
 			// Отпускаем
 			drag = nullptr;
 		}
-	
-		//// Если зажата левая кнопка - передвидаем
-		//if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
-		//{
-		//	sf::Vector2f NextPos = GetMouseCoords() - (*Drag).GetDragOffSet();
-		//
-		//	(*Drag).SetPosition(sf::Vector2f(window.mapCoordsToPixel(NextPos)));
-		//}
-		//// Если отпустили
-		//else
-		//{
-		//	// Если под курсором что-то
-		//	if (Over != nullptr)
-		//		(*Drag).OnDrop();
-		//	else
-		//		(*Drag).OnCancelDrag();
-		//
-		//	Drag = nullptr;
-		//}
 	}
 }
 
 void UIScreen::draw(sf::RenderTarget &target)
 {
 	for (UIBase *c : controls)
-		(*c).draw(target);
+	{
+		c->draw(target);
+	}
 }
 
 void UIScreen::addControl(UIDragable* control)
@@ -112,7 +95,7 @@ bool UIScreen::mouseIntersect()
 	bool intersect = false;
 	for (UIBase* c : controls)
 	{
-		if ((*c).getGlobalBounds().contains(getMouseLocalPos()))
+		if (c->getGlobalBounds().contains(getMouseLocalPos()))
 		{
 			intersect = true;
 			break;
@@ -120,4 +103,8 @@ bool UIScreen::mouseIntersect()
 	}
 
 	return intersect;
+}
+
+UIScreen::~UIScreen()
+{
 }

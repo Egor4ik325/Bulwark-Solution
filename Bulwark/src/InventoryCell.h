@@ -20,9 +20,9 @@ public:
 	void update() override;
 	void draw(sf::RenderTarget& target) override;
 
-	void setItem(Item* item);	
 	void removeItem();
 	bool isEmpty();
+	void setItem(Item* item);	
 	Item* getItem();
 };
 
