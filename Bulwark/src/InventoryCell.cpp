@@ -1,5 +1,5 @@
 #include "InventoryCell.h"
-#include "Item.h"
+#include "UIItem.h"
 #include "Global.h"
 #include "Content.h"
 #include "Inventory.h"
@@ -13,7 +13,7 @@ InventoryCell::InventoryCell(Inventory* inv) : UIDragable(inv->screenParent)
 	screenParent = invParent->screenParent;
 	// Хранимый предмет
 	itemContain = nullptr;
-	dragAble = true;
+	dragAble = false;
 	selectedColor = sf::Color::Black;
 	// Устанавливаем текстуру
 	setSize(sf::Vector2f(TILE_SIZE, TILE_SIZE));
@@ -23,13 +23,12 @@ InventoryCell::InventoryCell(Inventory* inv) : UIDragable(inv->screenParent)
 
 void InventoryCell::update()
 {
-	if (itemContain != nullptr)
+	if (itemContain != nullptr && !itemContain->isDragAllow())
 	{
 		// Двигаем Item внутри
 		itemContain->setPosition(getPosition());
 	}
 	UIDragable::update();
-
 }
 
 void InventoryCell::draw(sf::RenderTarget & target)
@@ -42,10 +41,11 @@ void InventoryCell::draw(sf::RenderTarget & target)
 	UIDragable::draw(target);
 }
 
-void InventoryCell::setItem(Item * item)
+void InventoryCell::setItem(UIItem * item)
 {
 	itemContain = item;
-	itemContain->onGround = false;
+	itemContain->setParent(this);
+	itemContain->item.onGround = false;
 	itemContain->setPosition(getPosition());
 }
 
@@ -59,7 +59,7 @@ bool InventoryCell::isEmpty()
 	return itemContain == nullptr;
 }
 
-Item * InventoryCell::getItem()
+UIItem * InventoryCell::getItem()
 {
 	return itemContain;
 }

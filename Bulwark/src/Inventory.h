@@ -6,9 +6,8 @@
 
 class Inventory : public UIWindow
 {
-protected:
+protected:	
 	std::vector <InventoryCell*> cells;
-
     unsigned int cellCount;
 	
 public:
@@ -24,6 +23,7 @@ public:
 	InventoryCell* getFirstEmptyCell();
 	InventoryCell* getSelectedCell();
 
+	~Inventory();
 protected:
 	void addCell();
 };

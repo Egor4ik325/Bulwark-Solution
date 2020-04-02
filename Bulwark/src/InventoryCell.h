@@ -4,12 +4,12 @@
 
 
 class Inventory;
-class Item;
+class UIItem;
 
 class InventoryCell : public UIDragable
 {
 public:
-	Item* itemContain;
+	UIItem* itemContain;
 
 	Inventory* invParent;
 	
@@ -22,7 +22,7 @@ public:
 
 	void removeItem();
 	bool isEmpty();
-	void setItem(Item* item);	
-	Item* getItem();
+	void setItem(UIItem* item);
+	UIItem* getItem();
 };
 

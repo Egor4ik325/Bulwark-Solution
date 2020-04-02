@@ -5,6 +5,24 @@
 std::vector <Item*> ItemManager::items;
 ItemInfo ItemManager::itemInfoArr[];
 
+void ItemManager::deleteItem(Item * item)
+{
+	// Удаляем из динам памяти
+	delete item;
+
+	// Удаляем из списка
+	for (int i = 0; i < items.size(); i++)
+	{
+		if (items[i] == item)
+		{
+			// Удаляем из списка
+			std::vector <Item*>::iterator iter = items.begin();
+			std::advance(iter, i);
+			items.erase(iter);
+		}
+	}
+}
+
 void ItemManager::addItem(Item * item)
 {
 	items.push_back(item);

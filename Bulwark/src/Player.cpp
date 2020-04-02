@@ -5,6 +5,7 @@
 #include "ItemManager.h"
 #include "Global.h"
 #include "InventoryCell.h"
+#include "UIItem.h"
 
 Player::Player()
 {
@@ -647,16 +648,21 @@ void Player::pickUp()
 	if (cell == nullptr)
 		return;
 	
-	cell->setItem(item);
+	
+	UIItem* uiItem = new UIItem(*item);
+	// Пока удоляем ненужный Item (который не наземле но существует)
+	ItemManager::deleteItem(item);
+
+	cell->setItem(uiItem);
 }
 
 void Player::dropUp(InventoryCell * cell)
 {
-	Item* item = cell->getItem();
+	UIItem* item = cell->getItem();
 	if (item == nullptr) return;
 
-	item->onGround = true;
-	item->setTilePosition(sf::Vector2f(getMiddleTilePos()));
+	item->item.onGround = true;
+	item->setPosition(sf::Vector2f(getMiddleTilePos()).x * TILE_SIZE, sf::Vector2f(getMiddleTilePos()).y * TILE_SIZE);
 	cell->removeItem();
 }
 

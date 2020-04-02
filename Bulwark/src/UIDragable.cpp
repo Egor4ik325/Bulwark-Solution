@@ -51,8 +51,6 @@ void UIDragable::update()
 		if (screenParent->drag != this)
 			screenParent->over = this;
 	}
-
-	updateChildren();
 }
 
 void UIDragable::onDragBegin()

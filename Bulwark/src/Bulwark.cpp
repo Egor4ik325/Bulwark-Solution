@@ -4,6 +4,7 @@
 #include "Global.h"
 #include "DebugRect.h"
 #include "ItemManager.h"
+#include "UIItem.h"
 
 using namespace sf;
 
@@ -34,7 +35,7 @@ Bulwark::Bulwark()
 	// яблоки
 	Item* item = new Item();
 	(*item).construct(ContentManager::itemSet, sf::IntRect(0, 0, TILE_SIZE, TILE_SIZE));
-	ItemManager::addItem(item);
+	//ItemManager::addItem(item);
 
 	Item* item2 = new Item();
 	(*item2).construct(ContentManager::itemSet, sf::IntRect(0, 0, TILE_SIZE, TILE_SIZE));
@@ -45,7 +46,11 @@ Bulwark::Bulwark()
 	player.inventory.setScreenParent(gameScreen);
 	player.inventory.createCells();
 	// Add item to inventory
-	player.inventory.getFirstEmptyCell()->setItem(item);
+	UIItem* uiItem = new UIItem(item);
+	uiItem->setFillColor(sf::Color::Transparent);
+	gameScreen.addControl(uiItem);
+
+	player.inventory.getFirstEmptyCell()->setItem(uiItem);
 }
 
 void Bulwark::addUI()

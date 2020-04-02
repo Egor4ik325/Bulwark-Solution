@@ -1,14 +1,28 @@
 #pragma once
 #include "Item.h"
-#include "UIBase.h"
+#include "UIDragable.h"
 
 ////////////////////////////////////////////////////////////
-/// \brief Item class which is cragable
+/// \brief Item class which is dragable
 ///
 ////////////////////////////////////////////////////////////
-class UIItem : public Item, public UIBase
+class UIItem : public UIDragable
 {
 public:
-	UIItem(UIScreen* screenParent);
-	UIItem(UIScreen* screenParent, const sf::Texture& texture, sf::IntRect rect);
+	UIItem(Item item);									   // Конструктор Item
+	UIItem(UIScreen* screenParent);						   // Конструктор UI
+	UIItem(const sf::Texture& texture, sf::IntRect rect);  // Конструктор Item
+
+	UIItem(Item* item);									   // Конструктор Item
+
+	virtual void draw(sf::RenderTarget& target) override;
+	virtual void update() override;
+
+	virtual void onDragBegin() override;
+	virtual void onDrop() override;
+	virtual void onCancelDrag() override;
+
+
+public:
+	Item item;
 };

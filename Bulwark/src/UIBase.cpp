@@ -6,15 +6,14 @@ UIBase::UIBase(UIScreen * screenParent) :
 {
 }
 
+//void UIBase::updateChildren()
+//{
+//	for (UIBase* c : childs)
+//		c->update();
+//}
+
 void UIBase::update()
 {
-	updateChildren();
-}
-
-void UIBase::updateChildren()
-{
-	for (UIBase* c : childs)
-		c->update();
 }
 
 void UIBase::draw(sf::RenderTarget & target)
@@ -24,14 +23,14 @@ void UIBase::draw(sf::RenderTarget & target)
 		target.draw(*this, getViewTransformOffSet());
 	}
 
-	drawChildren(target);
+	//drawChildren(target);
 }
 
-void UIBase::drawChildren(sf::RenderTarget & target)
-{
-	for (UIBase* c : childs)
-		c->draw(target);
-}
+//void UIBase::drawChildren(sf::RenderTarget & target)
+//{
+//	for (UIBase* c : childs)
+//		c->draw(target);
+//}
 
 void UIBase::setScreenParent(UIScreen * screenParent)
 {
@@ -47,11 +46,27 @@ const std::string & UIBase::getName() const
 {
 	return name;
 }
-UIBase::~UIBase()
+
+void UIBase::setParent(UIBase * parent)
 {
-	for (UIBase* c : childs)
-	{
-		delete c;
-	}
-	childs.clear();
+	this->parent = parent;
 }
+
+void UIBase::setChild(UIBase * child)
+{
+	this->child = child;
+}
+
+UIBase * UIBase::getChild()
+{
+	return child;
+}
+
+//UIBase::~UIBase()
+//{
+//	for (UIBase* c : childs)
+//	{
+//		delete c;
+//	}
+//	childs.clear();
+//}

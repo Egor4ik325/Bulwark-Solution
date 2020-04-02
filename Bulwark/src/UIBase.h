@@ -19,8 +19,10 @@ protected:
 	std::string name;
 	bool visible;
 
-	// Дети будет храниться в динамической памяти
-	std::vector<UIBase*> childs;
+	UIBase* parent;
+	UIBase* child;
+	//// Дети будет храниться в динамической памяти
+	//std::vector<UIBase*> childs;
 
 public:
 	UIScreen* screenParent; // Родитель
@@ -28,14 +30,17 @@ public:
 public:
 
 	virtual void update();
-	void updateChildren();
+	//void updateChildren();
 
 	virtual void draw(sf::RenderTarget& target);
-	void drawChildren(sf::RenderTarget& target);
+	//void drawChildren(sf::RenderTarget& target);
 
 	void setScreenParent(UIScreen* screenParent);
 	void setScreenParent(UIScreen& screenParent);
 	const std::string& getName() const;
 
-	~UIBase();
+	void setParent(UIBase* parent);
+	void setChild(UIBase* child);
+
+	UIBase* getChild();
 };
